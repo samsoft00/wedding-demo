@@ -1,0 +1,217 @@
+<style type="text/css">
+  .image-box{
+    position: relative;
+  }
+  .remove-btn{
+    position: absolute;
+    top: 5px;
+    right: 15px
+  }
+  .nested-fields{
+    /*margin-top: 10px;*/
+    /*position:relative;*/
+  }
+  .add-btn{
+    position: absolute;
+    top: -65px;
+    right: 10px;
+  }
+  .panel{
+    border-radius: 0
+  }
+  .thumbnail{
+    border-radius: 0px;
+  }
+  .wrapper{padding: 5px}
+  .uploadbtn .input-group{
+    position: absolute;
+    bottom: 30px;
+    right: 25px;    
+  }
+  .uploadbtn .btn-default {
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .panel {
+    border: 1px solid transparent;
+   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.0); 
+   box-shadow: 0 1px 1px rgba(0,0,0,.0); 
+  }
+  .panel-default>.panel-heading{
+    margin-bottom: 5px
+  }
+</style>
+
+<%= form_for(@listing, :html => {:multipart => true }) do |f| %>
+  <% if @listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul>
+      <% @listing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="form-group">
+    <%= f.label :name, "Listing Name", class: "control-label" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Listing Name", autofocus: true, autocomplete: "off" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :short_description, class: "control-label" %>
+    <!--  short-listing-description -->
+    <%= f.text_area :short_description, class: "form-control", size: "x4", placeholder: "Short Ddescription", maxlength: "100" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :details, "Listing Details", class: "control-label" %>
+    <%= f.text_area :details, class: "form-control summernote", size: "x12", placeholder: "Listing Details"%>
+  </div>  
+  <div class="form-group">
+    <%= f.label :category_id, "Select Category",class: "control-label" %><br/>
+    <%= f.select_tag("category[]", options_for_select(Category.all().collect{|cat| [cat.name,cat.id]}, @listing.category.collect{|cat| cat.id}), {:selected => 0, :multiple => "multiple", :class => "form-control", :id => "sS"}) %>        
+  </div>
+  <div class="form-group">
+    <%= f.label :pricing_and_faq, "Average Pricing", class: "control-label" %>
+    <%= f.text_field :pricing_and_faq, class: "form-control", placeholder: "Pricing"%>
+  </div>  
+  <!-- Association Fields -->
+  <div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th align="center" style="text-align:center;text-transform: uppercase;">Key</th>
+          <th align="center" style="text-align:center;text-transform: uppercase;">Value</th>
+          <th width="10%" style="text-align:center">
+            <%= link_to_add_association '<div class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></div>'.html_safe, f, :faq, :"data-association-insertion-node" => "tbody", :"data-association-insertion-method" => "append" %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>  
+        <%= f.fields_for :faq do |builder| %>
+          <%= render 'faq_fields', :f => builder %>
+        <% end %>        
+      </tbody>
+    </table>
+  </div>    
+
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+      <!-- <div class="link"> -->
+        <%= link_to_add_association '<div class="btn btn-success pull-right"><i class="fa fa-plus" aria-hidden="true"></i></div>'.html_safe, f, :pictures, :"data-association-insertion-node" => ".image-box", :"data-association-insertion-method" => "append" %>
+      <!-- </div> -->
+      Add Image
+    </div>
+
+    <!-- <div class="form-group"> -->
+      <div class="row image-box">
+        <%= f.fields_for :pictures do |image| %>
+          <%= render 'picture_fields', :f => image %>
+        <% end %>
+      </div>
+    <!-- </div> -->
+
+  </div>
+
+    <div class="form-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.check_box_tag(:status) %>
+          <%= f.label_tag(:status, "Save as Draft?") %>
+        </div>
+      </div>      
+    </div>
+  <!-- End of Listing Image Association Fields -->  
+  <div class="actions">
+    <!-- <%= f.submit %> -->
+    <%= button_tag(type: :submit,  class: "btn btn-lg btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."}) do %>
+      <i class="fa fa-send"></i> Create Listing
+    <% end %>
+  </div>
+<% end %>
+            
+<script>
+
+  $('.summernote').summernote({ 
+    height: 200,
+    tabsize: 2,
+    placeholder: 'Listing Details',
+    toolbar: [
+      // [groupName, [list of button]]
+      ['style', ['bold', 'italic', 'underline', 'clear']],
+      ['font', ['strikethrough', 'superscript', 'subscript']],
+      ['fontsize', ['fontsize']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['height', ['height']]
+    ],
+    codemirror: { // codemirror options
+      theme: 'cerulean'
+    },
+    disableDragAndDrop: false 
+  });
+
+   $('.short-listing-description').summernote({ 
+      height: 80,
+      toolbar: false,
+      plugins: "wordcount",
+      wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\/\-]*/g,      
+      disableDragAndDrop: false,
+      placeholder: 'Short Listing Description'
+    });
+
+  $( "#sSelect2" ).select2({
+    theme: "classic"
+  });
+
+  //:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+  // $(document).ready(function(){
+  //   $('#listing_pictures_attributes_0_image').on("change", function(){
+  //     console.log($(this).val());
+
+  //     $(".thumbnail").find("img").eq(0).prop('src', $(this).val());
+  //   });
+    // $('input[name^="listing[pictures_attributes]"]').each(function(index, fields){
+
+  // })
+
+
+
+  
+
+    // $(document).on("upload:start", "form", function(e) {
+    //   $(this).find("input[type=submit]").attr("disabled", true)
+    // });
+
+    // $(document).on("upload:success", "form", function(e) {
+    //   if(!$(this).find("input.uploading").length) {
+    //     $(this).find("input[type=submit]").removeAttr("disabled")
+    //   }
+
+    //   $("#image").html("<img />").attr(src: "/attachment/cache/fill/50/50/#{image_id}/image")
+    // });
+
+    // $(document).on("upload:complete", "form", function(e) {
+    //   if(!$(this).find("input.uploading").length) {
+    //     $(this).find("input[type=submit]").removeAttr("disabled")
+    //   }
+    // });
+
+  //:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+  document.getElementById('listing_img').onchange = function (e) {
+
+      loadImage(e.target.files[0], function (img) {
+              // document.body.appendChild(img);
+              // var testElement = $(this);
+              // testElement.closest('.thumbnail');
+              // testElement.append(img);
+          },
+          {maxWidth: 600} // Options
+      );
+  };
+
+</script>

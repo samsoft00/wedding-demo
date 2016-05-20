@@ -1,0 +1,69 @@
+<style type="text/css">
+  .image-box{
+    position: relative;
+  }
+  .remove-btn{
+    position: absolute;
+    top: 5px;
+    right: 15px
+  }
+  .nested-fields{
+    margin-top: 10px
+  }
+  .add-btn{
+    position: absolute;
+    top: -65px;
+    right: 10px;
+  }
+</style>
+
+<div class="main-container">
+  <div class="container">
+  <h2>Side Menu</h2>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="side-nav" id="leftCol">
+        <div class="hide-side" style="">
+          <ul class="listnone nav affix-top" id="sidebar">
+            <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> How it works</a></li>
+            <li class="active"><a href="#aboutus">Choose Template</a></li>
+            <li><a href="#">Couple Information</a></li>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Theme Slider</a></li>
+            <li><a href="#">Gallary</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 widget">
+      <div class="well-box">
+
+		    <div class="row thumb_holder">
+		      <div class="col-md-12">
+	          <div class="row">
+              <h2 class="gd-title page-header">Gallary</h2>
+            <%= form_for(@gallary, {url: wizard_path, :method => :put}) do |form| %>
+            <!-- Gallary Image Association Fields -->           
+              <div class="form-group">
+                <div class="row image-box">
+                  <%= form.fields_for :pictures do |image| %>
+                    <%= render 'gallary_picture_fields', :f => image %>
+                  <% end %>
+                  <div class="link">
+                    <%= link_to_add_association '<div class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add Image</div>'.html_safe, form, :pictures, :class => 'btn add-btn', partial: 'gallary_picture_fields', 'data-association-insertion-method' => 'before' %>
+                  </div>                   
+                </div>                
+              </div>	             
+              <!-- End Gallary Image Association Fields -->
+              <%= form.submit %>
+            <% end %>
+            
+	          </div>
+		      </div>
+
+      	</div>
+    	</div>
+  	</div>
+	</div>
+	</div>
+</div>

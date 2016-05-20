@@ -1,0 +1,10 @@
+<tr class=<%= "unread" if conversation.is_unread?(current_user) %>>
+    <td class="inbox-small-cells">
+        <input type="checkbox" class="mail-checkbox">
+    </td>
+    <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+    <td class="view-message  dont-show">Avatar</td>
+    <td class="view-message "><%= conversation.subject %></td> <!-- message -->
+    <!-- <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td> -->
+    <td class="view-message  text-right">9:27 AM</td> <!-- time -->
+</tr>	

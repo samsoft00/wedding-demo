@@ -1,0 +1,38 @@
+/* line 1, C:/Ruby21/workspace/wedding/app/assets/stylesheets/listings.css.scss */
+.waiting-approval {
+  color: #bbb;
+  font-weight: 600;
+  font-style: italic;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+@import "bootstrap-sprockets";
+/*@import "bootstrap";*/
+@import "vendor-theme/bootstrap.min";
+@import 'bootstrap-datetimepicker';
+@import "vendor-theme/style";
+@import "vendor-theme/owl.carousel";
+@import "vendor-theme/owl.theme";
+@import "vendor-theme/owl.transitions";
+@import "vendor-theme/bootstrap-select.min";
+@import "listings";
+@import "font-awesome";
+@import "conversation";
+
+@import "select2";
+@import "select2-bootstrap";
+@import "jquery.raty";

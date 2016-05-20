@@ -1,0 +1,87 @@
+/*.thumb_holder {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    float: left;
+    text-align: center;
+}
+*/
+a {
+    outline: medium none !important;
+    color: #727272;
+}
+
+.thumb .overley {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0;
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+    z-index: 3;
+    transition: all 0.3s ease-out 0s;
+    background: url('http://codelayers.net/templates/hasta/demo/images/transparent_bg3.png') 0 0 repeat;
+}
+
+.thumb {
+    position: relative;
+    width: 100%;
+    padding: 0px;
+    margin: 0 0 10px 0;
+    z-index: 2;
+    overflow: hidden;
+}	
+
+.thumb img {
+    position: relative;
+    width: 100%;
+    transition: all 0.3s ease-out 0s;
+}
+
+.template-box .panel-body {
+    padding: 0px;
+}
+
+.template-box .panel-default {
+    /*border-color: #bbb;*/
+}
+
+.template-box .panel{
+    border-radius: 0px;
+    /*border: 1px solid transparent;*/
+}
+
+.minicolors-theme-bootstrap .minicolors-swatch {
+    width: 42px;
+    height: 42px;
+    border-radius: 0px;
+    margin-right: 5px;
+}
+
+.thumb_holder .gd-title{
+    text-transform: capitalize;
+     margin-bottom: 20px; 
+    letter-spacing: 1px;
+    font-size: 32px;
+}
+
+.guideline-section {
+     margin-bottom: 0px; 
+     border-bottom: 0px solid #e9e6e0; 
+     padding-bottom: 0px; 
+}
+
+label[for="site_groom_image"],
+label[for^="slider_pictures_attributes_"],
+label[for^="gallary_pictures_attributes"],
+label[for^="listing_pictures_attributes"],
+label[for="profile_profile_image"],
+label[for="site_bride_image"] { line-height: 35px; } 
+
+.list > .well {
+    padding: 10px;
+    border: none;
+    border-radius: 0px; 
+}

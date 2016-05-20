@@ -1,0 +1,13 @@
+<div class="main-container">
+	<div class="container">
+			<h1>Wedding Location</h1>
+				<!-- Put the name of the couple here -->
+				<%= form_for(@location, url:{:actions => "wedding_location"}, class: "form-horizontal") do |f| %>
+
+				  <div class="actions">
+				    <%= f.submit %>
+				  </div>
+				<% end %>
+
+	</div>
+</div>

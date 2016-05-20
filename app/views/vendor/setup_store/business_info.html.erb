@@ -1,0 +1,77 @@
+<style type="text/css">
+	.bootstrap-filestyle {
+    margin: auto; 
+    padding-top: 10px;		
+	}
+</style>
+<div class="main-container">
+  <div class="container">
+  <h2>Side Menu</h2>
+  <div class="row">
+    <div class="col-md-3">
+    	<%= tutorial_progress_bar %>
+    </div>
+    <div class="col-md-9 widget">
+      <div class="well-box">
+
+		    <div class="row thumb_holder">
+		      <div class="col-md-12">
+	          <div class="row">
+	            <div class="col-md-12">
+	              <h2 class="gd-title">Business Info</h2>
+	            </div>
+
+							<%= form_for(@profile, url: wizard_path, method: :put, class: "form-horizontal") do |f| %>		
+
+							  <% if f.object.errors.any? %>
+							    <div class="error_messages"> 
+							      <% f.object.errors.full_messages.each do |error| %>
+							        <p><%= error %></p>
+							      <% end %>
+							    </div>
+							  <% end %>
+									
+			          <div class="form-group">
+			            <div class="profile-userpic"> <%= image_tag "profile_user.jpg", class:"img-responsive img-circle", alt:"" %> 
+										<%= f.attachment_field :profile_image, direct: true, class: "filestyle", :'data-input'=>"false", :'data-buttonName'=>"btn-primary btn-sm" %>
+			            </div>
+			          </div>							  
+							  
+							  <div class="form-group">
+							    <%= f.label :name, class: "control-label" %><br>
+							    <%= f.text_field :name, class: "form-control", placeholder: "Enter Name", autofocus: true, autocomplete: "off" %>
+							  </div>
+							  <div class="form-group">
+							    <%= f.label :business_name, "Company Name", class: "control-label" %><br>
+							    <%= f.text_field :business_name,class: "form-control", placeholder: "Enter Business Name", autocomplete: "off" %>
+							  </div>
+							  <div class="form-group">
+							    <%= f.label :about, "About Company", class: "control-label" %><br>
+							    <%= f.text_area :about, class: "form-control", placeholder: "About Company", autocomplete: "off" %>
+							  </div>
+							  <div class="form-group">
+							    <%= f.label :services, class: "control-label" %>
+							    <%= f.text_area :services, class: "form-control", placeholder: "Service Render, seperated by comma", autocomplete: "off" %>
+							  </div> 							  
+							  <div class="form-group">
+							    <%= f.label :phone, class: "control-label" %>
+							    <%= f.text_field :phone,class: "form-control", placeholder: "Enter Phone Number", autofocus: true, autocomplete: "off" %>
+							  </div>
+							  <div class="form-group">
+							    <%= f.label :category_id, "Type of Business", class: "control-label" %>
+							    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category", class: "form-control selectpicker" %>
+							  </div> 
+							  <div class="actions">
+							    <%= f.button "Continue", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."} %>
+							  </div>
+							<% end %>
+
+	          </div>
+		      </div>
+
+      	</div>
+    	</div>
+  	</div>
+	</div>
+	</div>
+</div>

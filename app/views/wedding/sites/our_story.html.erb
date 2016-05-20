@@ -1,0 +1,24 @@
+<div class="main-container">
+	<div class="container">
+			<h1>Our Story</h1>
+				<!-- Put the name of the couple here -->
+				<%= form_for(@our_story, url:{:actions => "our_story"}, class: "form-horizontal") do |f| %>
+				  <div class="form-group">
+					  <%= f.label :how_we_meet, class: "control-label" %>
+					  <%= f.text_area :how_we_meet, class: "form-control" %>
+				  </div>
+				  <div class="form-group">
+				    <%= f.label :first_date, class: "control-label" %>
+					  <%= f.text_area :first_date, class: "form-control" %>
+				  </div>
+				  <div class="form-group">
+				    <%= f.label :proposal, class: "control-label" %>
+					  <%= f.text_area :proposal, class: "form-control" %>
+				  </div>
+				  <div class="actions">
+				    <%= f.submit %>
+				  </div>
+				<% end %>
+
+	</div>
+</div>

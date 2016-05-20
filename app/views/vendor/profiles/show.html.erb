@@ -1,0 +1,122 @@
+<div class="tp-page-head"><!-- page header -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1><%= @profile.business_name %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tp-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active"><%= @profile.business_name %></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 page-sidebar">
+        <div class="row">
+          <div class="col-md-12 vendor-profile-block">
+            <div class="vendor-profile">
+              <%= attachment_image_tag(@profile, :profile_image, :fill, 715, 600, fallback: "vendor-profile.jpg", class:"img-responsive") %>
+            </div>
+          </div>
+
+          <div class="col-md-12 ">
+            <div class="social-sidebar side-box">
+              <ul class="listnone follow-icon">
+                <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube-square"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+              </ul>
+            </div>
+          </div>       
+
+        </div>
+      </div>
+      <div class="col-md-offset-1 col-md-7 page-description">
+        <div class="vendr-profile-info">
+          <h1><%= @profile.business_name %></h1>
+          <p class="profile-address"><i class="fa fa-map-marker"></i> <%= @profile.address %></p>
+          <p><span class="profile-email"><i class="fa fa-envelope"></i><%= current_user.email %></span>
+          <span class="profile-website"><i class="fa fa-link"></i><a href="#"><%= @profile.website %></a></span></p>
+        </div>
+        <div class="venue-details">
+          <h2><%= "About #{@profile.business_name}" %></h2>
+          <p><%= @profile.about %></p><!--  class="lead" -->
+        </div>
+        <% if !@profile.services.nil? %>
+        <div class="profile-feature">
+          <div class="row">
+            <div class="col-md-3">
+              <h3 class="profile-feature-title">Services:</h3>
+            </div>
+            <div class="col-md-9"><%= @profile.services %></div>
+          </div>
+        </div>
+        <% end %>
+        <button name="submit" class="btn tp-btn-default tp-btn-lg btn-block"><%= "Contact #{@profile.business_name}" %></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="googleMap" class="map"></div>
+<% if @user.listing.size > 0 %>
+  <div class="spacer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 tp-title">
+          <h1>Recommend for your Wedding</h1>
+        </div>
+        <% @user.listing.limit(3).each do |user_listing| %>
+          <div class="col-md-4 vendor-box"><!-- venue box start-->
+            <div class="vendor-image"><!-- venue pic --> 
+              <a href="#"><%= attachment_image_tag(user_listing.pictures.first, :image, :fill, 715, 400, class: "img-responsive") %></a> </div>
+            <!-- /.venue pic -->
+            <div class="vendor-detail"><!-- venue details -->
+              <div class="caption"><!-- caption -->
+                <h2><a href="" class="title"><%= user_listing.name %></a></h2>
+                <p class="location"><i class="fa fa-map-marker"></i> <%= @user.profile.address %> </p>
+                <div class="rating pull-left"><span class="star-rating" data-score= <%= user_listing.rate %> ></span><span class="rating-count">(<%= "#{user_listing.reviews.length}" %>)</span> </div>
+              </div>
+              <!-- /.caption -->
+              <div class="vendor-price">
+                <div class="price">$600</div>
+              </div>
+            </div>
+            <!-- venue details -->  
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+  $('.star-rating').raty({ 
+    path: "https://s3.amazonaws.com/versity/",
+    readOnly: true,
+    score: function(){
+      return $(this).attr('data-score');
+    }
+  });
+
+  $('#star-rating-form').raty({ 
+    path: "https://s3.amazonaws.com/versity/",
+    scoreName: 'review[rating]'
+  });  
+</script>

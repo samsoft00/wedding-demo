@@ -1,0 +1,277 @@
+<div class="tp-page-head">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1><%= @listing.name %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tp-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Venue Listing</a></li>
+          <li class="active"><%= @listing.name %></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-container">
+  <div class="container tabbed-page st-tabs">
+    <div class="row tab-page-header">
+
+      <div class="col-md-8 title">
+        <h1><%= @listing.name %></h1>
+        <p class="location"><i class="fa fa-map-marker"></i><%= @listing.profile.address %></p>
+        <hr>
+        <div class="star-rating" data-score= <%= @listing.rate %> ></div>
+        <p><%= "#{@listing.reviews.length} Reviews" %></p>
+      </div>
+      <div class="col-md-4 venue-data">
+        <div class="venue-info"><!-- venue-info-->
+          <div class="capacity">
+            <div>Capacity:</div>
+            <span class="cap-people"> 50 - 300 </span>
+          </div>
+          <div class="pricebox">
+            <div>Avg price:</div>
+            <span class="price">$39.50</span>
+          </div>
+        </div>
+        <%= link_to "Contact #{@listing.profile.business_name}", show_user_conversation_conversations_path(@listing.user.username, :related_listing_id => @listing.id), class: "btn tp-btn-default tp-btn-lg btn-block" %>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <!-- Tab panes -->
+        <div class="profile-gallery" id="photo">
+          <div class="row">
+          <!-- <div class="col-md-12"><h1>Gallery</h1></div> -->
+            <div class="col-md-12">
+              <div id="sync1" class="owl-carousel img-thumbnail">
+              <% @listing.pictures.each do |image| %>
+                <div class="item"> <%= attachment_image_tag(image, :image, :limit, 740, 400, class: "img-responsive") %> </div>
+              <% end %>
+            </div>
+            <div id="sync2" class="owl-carousel">
+              <% @listing.pictures.each do |image| %>
+                <div class="item" style="padding:0px"> <%= attachment_image_tag(image, :image, :fill, 125, 100, class: "img-responsive") %> </div>
+              <% end %>
+            </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- /.tab content start--> 
+        
+        <div class="venue-details">
+          <h2><%= "About #{@listing.name}" %></h2>
+          <%= @listing.details.html_safe %>
+        </div>
+        
+        <hr/>
+        <div class="profile-feature">
+          <% @listing.faq.each do |faq| %>  
+            <div class="row">
+              <div class="col-md-3">
+                <h3 class="profile-feature-title"><%= faq.key %>:</h3>
+              </div>
+              <div class="col-md-9"><%= faq.value %></div>
+            </div>
+          <% end %>
+        </div>
+
+
+        <div class="row">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+            <a href="#about" title="about info" aria-controls="about" role="tab" data-toggle="tab">
+            <i class="fa fa-info-circle"></i>
+            <span class="tab-title">About</span>
+            </a>
+            </li>
+            <li role="presentation"><a href="#onmap" title="Location" aria-controls="onmap" role="tab" data-toggle="tab"> <i class="fa fa-map-marker"></i> <span class="tab-title">On map</span></a></li>
+            <li role="presentation"><a href="#video" title="Video" aria-controls="video" role="tab" data-toggle="tab"> <i class="fa fa-youtube-play"></i> <span class="tab-title">Video</span></a></li>
+            <li role="presentation"><a href="#amenities" title="Amenities" aria-controls="amenities" role="tab" data-toggle="tab"> <i class="fa fa-asterisk"></i> <span class="tab-title">Amenities</span></a></li>
+            <li role="presentation"><a href="#reviews" title="Review" aria-controls="reviews" role="tab" data-toggle="tab"> <i class="fa fa-commenting"></i> <span class="tab-title">Reviews</span></a></li>
+          </ul>
+          
+          <!-- Tab panes -->
+          <div class="tab-content"><!-- tab content start-->
+            <div role="tabpanel" class="tab-pane fade" id="about">
+              <div class="venue-details">
+
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="onmap">
+              <div id="googleMap" class="map"></div>
+            </div>       
+            <div role="tabpanel" class="tab-pane fade" id="video"> 
+              <!-- 16:9 aspect ratio -->
+              <div class="embed-responsive embed-responsive-16by9"> 
+                <iframe class="embed-responsive-item" src="https://youtu.be/IoculKPiiEk"></iframe> 
+                <a href="javascript:void(0)"><%= image_tag "video.jpg", alt:"", class:"img-responsive" %></a> 
+              </div>  
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="amenities">
+              <div class="row">
+                <div class="col-md-6 venue-amenities">
+                  <h2>Venue Facilities</h2>
+
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="reviews"> 
+              <!-- comments -->
+              <div class="customer-review">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1><%= "#{@listing.name} Review" %></h1>
+                    <div class="review-list" id="review-list-box">
+                      <% if @listing.reviews.size > 0 %>
+                        
+                        <% @listing.reviews.each do |review| %>
+                          <!-- First Comment -->
+                          <div class="row">
+                            <div class="col-md-2 col-sm-2 hidden-xs">
+                              <div class="user-pic"> <%= attachment_image_tag(review.listing.profile, :profile_image, :fill, 300, 300, class:"img-responsive img-circle") %> </div>
+                            </div>
+                            <div class="col-md-10 col-sm-10">
+                              <div class="panel panel-default arrow left">
+                                <div class="panel-body">
+                                  <div class="text-left">
+                                    <div class="star-rating" data-score= <%= review.rating %> ></div>
+                                  </div>
+                                  <div class="review-post">
+                                    <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
+                                  </div>
+                                  <div class="review-user">By <%= link_to review.user.username, user_profile_path(review.user.username) %>, on <span class="review-date"></span><%= review.created_at.strftime("%B %d, %Y") %></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        
+                        <% end %>                        
+
+                          <div class="row">
+                            <div id="review-status"></div>
+                          </div>                        
+                      
+                      <% else %>
+                        
+                        <h2 class="lead text-center"><%= "No Review! Be the first to review #{@listing.name}." %> </h2>
+
+                        <div class="row">
+                          <div id="review-status"></div>
+                        </div>                        
+
+                      <% end %>
+                    </div>
+                    <% if user_signed_in? %>
+                      <div class="review">
+                        <a class="btn tp-btn-primary btn-block tp-btn-lg" role="button" data-toggle="collapse" href="#review" aria-expanded="false" aria-controls="review"> Write A Review </a> 
+                      </div>
+                      <!-- Review Box -->
+                      <div class="collapse review-list review-form" id="review">
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+                            <h1>Write Your Review</h1>
+                            <div id="error-msg"></div>
+                            <%= form_for @review, url: new_listing_review_path(username: @listing.user.username, id: @listing.id), remote: true, method: :post do |f| %>
+                              <div id="star-rating-form"></div>
+                              <div class="form-group">
+                                <%= f.hidden_field :listing_id, value: @listing.id %>
+                              </div>
+                              <div class="form-group">
+                                <%= f.label :comment, "Review", class: "control-label" %>
+                                <%= f.text_area :comment, 
+                                                placeholder: "Type Review...",
+                                                size: "x5", class: "form-control",
+                                                required: true %>
+
+                              </div>
+                              <div class="form-group">
+                                <%= render "common/spinner" %>
+                                <%= f.button_tag("Submit Review", class: "btn btn-lg btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."}) %>
+                              </div>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    <% else %>
+                      <div class="review">
+                        <%= link_to "Sign In", new_user_session_path, class: "btn tp-btn-primary btn-block tp-btn-lg" %>
+                      </div>
+                    <% end %>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>       
+                
+      </div>
+
+      <div class="col-md-4">
+        
+        <div class="profile-sidebar side-box"> 
+          <!-- SIDEBAR USERPIC -->
+          <div class="profile-userpic">
+            <%= attachment_image_tag(@listing.profile, :profile_image, :fill, 250, 250, fallback: "vendor-profile.jpg", class:"img-responsive img-circle") %>
+          </div>
+          <div class="profile-usertitle">
+            <div class="profile-usertitle-name">
+              <h2><%= @listing.profile.name %></h2>
+            </div>
+            <div class="profile-address"> <i class="fa fa-map-marker"></i> <%= truncate(@listing.profile.address) %> </div>
+            <div class="profile-email"> <i class="fa fa-envelope"></i> <%= @listing.user.email %> </div>
+            <div class="profile-address"> <i class="fa fa-phone"></i> <%= @listing.profile.phone %> </div>
+            <% if @listing.profile.website.present? %>
+              <div class="profile-website"> <i class="fa fa-link"></i> <a href="#"><%= @listing.profile.website %></a> </div>
+            <% end %>
+            </div>
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <div class="social-sidebar side-box">
+          <ul class="listnone follow-icon">
+            <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube-square"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+          </ul>
+        </div>
+        <%= link_to "Contact #{@listing.profile.business_name}", show_user_conversation_conversations_path(@listing.user.username), class: "btn tp-btn-default tp-btn-lg btn-block" %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.star-rating').raty({ 
+    path: "https://s3.amazonaws.com/versity/",
+    readOnly: true,
+    score: function(){
+      return $(this).attr('data-score');
+    }
+  });
+
+  $('#star-rating-form').raty({ 
+    path: "https://s3.amazonaws.com/versity/",
+    scoreName: 'review[rating]'
+  });  
+</script>

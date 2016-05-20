@@ -1,0 +1,102 @@
+<%= form_for(@site, url:{:action => "create"}, class: "form-horizontal") do |f| %>
+  <% if @site.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@site.errors.count, "error") %> prohibited this site from being saved:</h2>
+
+      <ul>
+      <% @site.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <%= f.label :groom_name, class: "control-label" %>
+            <%= f.text_field :groom_name, class:"form-control" %>
+          </div>
+          <div class="form-group col-sm-12">
+            <%= f.label :about_groom, class: "control-label" %>
+            <%= f.text_area :about_groom, class: "form-control" %>
+          </div>
+        </div>       
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <%= f.label :bride_name, class: "control-label" %>
+            <%= f.text_field :bride_name, class: "form-control" %>
+          </div>
+          <div class="form-group col-sm-12">
+            <%= f.label :about_bride, class: "control-label" %>
+            <%= f.text_area :about_bride, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.label :wedding_date, class: "control-label" %>
+        <div class='input-group date' id='wedding_date'>
+          <%= f.text_field :wedding_date, class: "form-control" %>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%= f.label :event_planner, class: "control-label" %>
+        <%= f.text_field :event_planner, class: "form-control" %>      
+      </div>
+      <div class="col-md-4">    
+        <%= f.label :photographer, class: "control-label" %>
+        <%= f.text_field :photographer, class: "form-control" %>
+      </div>
+    </div>
+  </div> 
+  <div class="row">
+  <!-- Association Fields -->
+    <%= f.fields_for :wedding_location do |builder| %>
+      <%= render 'wedding_location_fields', :f => builder %>
+    <% end %>
+    <div class="link" style="clear:both">
+      <%= link_to_add_association '<div class="btn btn-success" style="margin-bottom:10px"><span class="glyphicon glyphicon-plus"></span> Add Event</div>'.html_safe, f, :wedding_location %>
+    </div>
+  <!-- End Association Fields -->
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+    $(function () {
+      $('.event-date').each(function(){
+          $(this).datetimepicker({ format: 'DD-MM-YYYY'});
+      });      
+      
+      $('.from').each(function(){
+        $(this).datetimepicker({ format: 'LT' });
+      });
+      
+      $('.to').each(function(){
+        $(this).datetimepicker({ format: 'LT' });
+      });
+
+      $('#wedding_date').datetimepicker({ format: 'DD-MM-YYYY' });
+
+      $('body').on('focus',".datepicker_recurring_start", function(){
+          $(this).datepicker();
+      });
+
+    });
+</script>

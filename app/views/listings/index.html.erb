@@ -1,0 +1,110 @@
+<style type="text/css">
+  .st-tabs .nav-tabs>li.active>a{border: none;}
+  .st-tabs .tab-content{
+    border: none;   
+  }
+  .st-tabs .nav-tabs>li>a{
+    border: none;
+    background-color:transparent;
+  }
+</style>
+
+<div id="main-container" class="main-container"><!-- main container -->
+  <div class="st-tabs"><!-- shortcode -->
+    <div class="container">
+      <div class="row">
+        <% if !@listings.count %>
+          <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-alert"></span> <strong>Info!</strong> You've no listing, click on New button to upload Listings
+          </div>
+        <% end %>
+        <div class="col-md-12">
+          <div class="page-header">
+            <%= link_to "Add a New Listing", new_listing_path(current_user.username), class: "btn btn-success pull-right" %>
+            <h1>My Listings</h1>
+          </div>
+
+          <!-- Nav tabs -->
+          <%= render 'listings/listing_tab' %>
+          <!-- Tab panes -->
+          <hr/>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="active">
+
+<!--             <div class="panel panel-default">
+              <div class="panel-body"> -->
+
+                <div class="table-container">
+                  <table class="table table-filter">
+                    <tbody>
+                      <% @listings.pending.each_with_index do | listing, index| %>
+                        <tr>
+                          <td align="center" style="vertical-align: middle;">
+                            <div class="ckbox">
+                              <%= index+1  %>
+                            </div>
+                          </td>
+
+                          <td style="vertical-align: middle;">
+                            <div class="media">
+                              <a href="#" class="pull-left">
+                                <%= attachment_image_tag(listing.pictures.first, :image, :fill, 60, 60, class: "img-responsive") %>
+                              </a>
+                              <div class="media-body">
+                                <h4 class="title" style="margin-bottom:10px;text-transform:uppercase"><%= link_to listing.name, display_vendor_listing_path(id: listing.slug) %></h4>
+                                <p class="summary"><%= listing.short_description %></p>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td width="15%" style="vertical-align: middle; text-align:center;">
+                            <span class="media-meta">
+                              <%= listing.created_at.strftime("%B %d, %Y") %>
+                            </span>
+                          </td>
+                          <td align="center" style="vertical-align: middle;">
+                            <!-- Small button group -->
+                            <div class="btn-group">
+                              <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Pause</a></li>
+                                <li><%= link_to "Edit",  edit_listing_path(id: listing.id, username: current_user.username) %></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Delete</a></li>
+                              </ul>
+                            </div>                          
+
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+
+<!--               </div>
+            </div> -->             
+            </div>
+            <div role="tabpanel" class="tab-pane" id="pending">
+              <p> Fusce accumsan, mauris interdum</p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="required-modification">
+              <p> Morbi tincidunt sit  </p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="draft">
+              <p> Fusce accumsan</p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="denied">
+              <p> Fusce accumsan</p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="paused">
+              <p> Fusce accumsan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

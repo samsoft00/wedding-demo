@@ -1,0 +1,128 @@
+<%= form_for @site, url: wizard_path, method: :put do |f| %>
+  <% if @site.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@site.errors.count, "error") %> prohibited this site from being saved:</h2>
+
+      <ul>
+      <% @site.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <%= f.label :groom_name, class: "control-label" %>
+            <%= f.text_field :groom_name, class:"form-control" %>
+          </div>
+          <div class="form-group col-sm-12">
+            <%= f.label :about_groom, class: "control-label" %>
+            <%= f.text_area :about_groom, class: "form-control", size: "x5" %>
+          </div>
+          <div class="form-group col-sm-12">
+            <!-- Bride Image Upload -->
+            <%= f.label :groom_image, class: "control-label" %>
+            <% if !@site.new_record? %>
+              <div class="thumbnail">
+                <%= attachment_image_tag(f.object, :groom_image, :fill, 400, 200) %>
+              </div>
+            <% end %>
+            <%= f.attachment_field :groom_image, html: {class: "filestyle", 'data-buttonBefore' => true} %>
+          </div>          
+        </div>       
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <%= f.label :bride_name, class: "control-label" %>
+            <%= f.text_field :bride_name, class: "form-control" %>
+          </div>
+          <div class="form-group col-sm-12">
+            <%= f.label :about_bride, class: "control-label" %>
+            <%= f.text_area :about_bride, class: "form-control", size: "x5" %>
+          </div>
+          <div class="form-group col-sm-12">
+            <!-- Bride Image Upload -->
+            <%= f.label :bride_image, class: "control-label" %>
+            <% if !@site.new_record? %>
+              <div class="thumbnail">
+                <%= attachment_image_tag(f.object, :bride_image, :fill, 400, 200) %>
+              </div>
+            <% end %>            
+            <%= f.attachment_field :bride_image, html: {class: "filestyle", "data-buttonBefore" => true} %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.label :wedding_date, class: "control-label" %>
+        <div class='input-group date' id='wedding_date'>
+          <%= f.text_field :wedding_date, class: "form-control" %>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%= f.label :event_planner, "Choose Vendor", class: "control-label" %>
+        <%= f.text_field :event_planner, class: "form-control" %>      
+      </div>
+      <div class="col-md-4">    
+        <%= f.label :photographer, "Choose Vendor", class: "control-label" %>
+        <%= f.text_field :photographer, class: "form-control" %>
+      </div>
+      <%= f.hidden_field :id %>
+    </div>
+  </div> 
+  <hr/>
+  <div class="row" id="location-box">
+  <!-- Association Fields -->
+    <%= f.fields_for :wedding_location do |builder| %>
+      <%= render 'wedding_location_fields', :f => builder %>
+    <% end %>
+    <div class="container">
+      <div class="link" style="clear:both">
+        <%= link_to_add_association '<div class="btn btn-success" style="margin-bottom:10px"><span class="glyphicon glyphicon-plus"></span> Add Event</div>'.html_safe, f, :wedding_location %>
+      </div>
+    </div>
+  <!-- End Association Fields -->
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+  $(function () {
+    $('.event-date').each(function(){
+        $(this).datetimepicker({ format: 'DD-MM-YYYY'});
+    });      
+    
+    $('.from').each(function(){
+      $(this).datetimepicker({ format: 'LT' });
+    });
+    
+    $('.to').each(function(){
+      $(this).datetimepicker({ format: 'LT' });
+    });
+
+    $('#wedding_date').datetimepicker({ format: 'DD-MM-YYYY' });
+
+    $('body').on('focus',".datepicker_recurring_start", function(){
+        $(this).datepicker();
+    });
+
+  });
+
+  $(":file").filestyle({ buttonAfter: true });
+  $('.chosen-it').chosen({max_selected_options: 1});
+</script>

@@ -1,0 +1,17 @@
+<div class="col-xs-12 col-md-4 nested-fields">
+  <div class="wrapper">
+    <a class="thumbnail">
+      <% if f.object.new_record? %>
+        <%= image_tag "vendor-1.jpg", alt:"" %>
+      <% else %>
+        <%= attachment_image_tag(f.object, :image, :fill, 300, 200) %>
+      <% end %>
+    </a>
+    <div class="row">
+      <div class="col-sm-12 uploadbtn">
+        <%= f.attachment_field :image, direct: true, class: "filestyle", :'data-input' => "false" %>
+      </div>
+    </div>
+    <%= link_to_remove_association '<span class="glyphicon glyphicon-remove"></span>'.html_safe, f, :class => 'btn remove-btn' %>
+  </div>
+</div>

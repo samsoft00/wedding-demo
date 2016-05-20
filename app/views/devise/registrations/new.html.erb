@@ -1,0 +1,109 @@
+<div class="tp-page-head">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1>Sing Up Vendor</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tp-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">Sing Up Vendor</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 tp-title-center">
+        <h1>Become a member</h1>
+        <p>Wedding Vendor works with thousands of wedding vendors worldwide. Vendors nearby are automatically includ in your wedding 
+          planning account.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-7 st-tabs"> 
+        <!-- Nav tabs -->
+<!--         <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Personal Details</a></li>
+        </ul> -->       
+        
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">
+          
+            <% if !flash.empty? %>
+              <% flash.each do |key, value| %>
+                <%= content_tag :div, value.html_safe, class: "alert alert-#{key}" %>
+              <% end %>
+            <% end %>           
+
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= devise_error_messages! %>
+              
+              <div class="form-group">
+                <%= f.label :username, class: "control-label" %>
+                <%= f.text_field :username, class: "form-control", placeholder: "Enter Username", autofocus: true, autocomplete: "off" %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :email, class: "control-label" %>
+                <%= f.email_field :email, class: "form-control", placeholder: "Email Address", required: true, autocomplete: "off" %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password, class: "control-label" %>
+                <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %><br />
+                <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password_confirmation, class: "control-label" %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+                <%= hidden_field resource_name, :user_type, value: params[:user][:user_type] %>
+              </div>
+              <div class="form-group">
+                <%= f.submit "Sign up", class: "btn tp-btn-primary tp-btn-lg" %>
+              </div>
+            <% end %>
+
+            <%= render "devise/shared/links" %>
+
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-md-5">
+          <div class="row">
+            <div class="col-md-12 feature-block">
+              <div class="well-box">
+                <div class="feature-icon"><%= image_tag "envelop.svg", alt: ""%></div>
+                <h3>Questions ? Contact us</h3>
+                <p>Nam poenatis condimentum. Fusce risus odiamrper at, lacinia vel leo.</p>
+                <a href="#" class="btn tp-btn-default">Help Center</a> </div>
+            </div>
+            <div class="col-md-12 feature-block">
+              <div class="well-box">
+                <div class="feature-icon"><%= image_tag "pricing.svg", alt: ""%></div>
+                <h3>Wedding Budget</h3>
+                <p>Venenatis conntum. Fusce risus odio, egestas sit amet ullamcornia vel leo.</p>
+                <a href="#" class="btn tp-btn-default">View Pricing</a> </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

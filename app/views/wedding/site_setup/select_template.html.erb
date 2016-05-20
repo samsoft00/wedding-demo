@@ -1,0 +1,109 @@
+<div class="main-container">
+  <div class="container">
+  <h2>Side Menu</h2>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="side-nav" id="leftCol">
+        <div class="hide-side" style="">
+          <ul class="listnone nav affix-top" id="sidebar">
+            <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> How it works</a></li>
+            <li class="active"><a href="#aboutus">Choose Template</a></li>
+            <li><a href="#">Couple Information</a></li>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Theme Slider</a></li>
+            <li><a href="#">Gallary</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 widget">
+      <div class="well-box">
+
+        <div class="row thumb_holder">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="gd-title">Choose Theme</h2>
+              </div>
+
+		            <%= form_for @layout, url: wizard_path, method: :put do |f|%>
+									<div class="form-group">
+										<div class="col-md-12">
+											<%= f.label :name, "Choice Template of your choice", class:"control-label" %>
+										</div>
+									</div>
+			            <% @templates.each do |template | %>
+										<div class="col-md-4 text-center template-box">
+											<div class="panel panel-default">
+											  <div class="panel-body">
+													<div class="thumb">
+														<a href="http://codelayers.net/templates/hasta/corporate/fullwidth/index.html" target="_blank">
+															<div class="overley"></div>
+														</a>
+														<%= image_tag "http://codelayers.net/templates/hasta/demo/images/thumb1.jpg", alt:"", class:"img-responsive" %>
+													</div>
+											  </div>
+											  <div class="panel-footer">
+													<div class="but">
+														<%=  f.radio_button :name, template.name, :checked => false, :class => "icheck-me", 'data-skin'=>"square", 'data-color'=>"blue" %>
+														<%= f.label :name, :value => template.name %>
+														<!-- <a href="#" target="_blank"></a> -->
+													</div>							  	
+											  </div>
+											</div>							
+										</div>
+									<% end %>
+									<div class="col-md-12">
+										<div class="form-group">
+											<%= f.label :color, "Choose Template Color <em>(Leave blank to use default color)</em>".html_safe, class:"control-label" %>
+											<%= f.text_field :color, class:"form-control", id: "color-panel", as: :minicolors %>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<%= f.submit "Continue", class: "btn btn-success pull-right" %>
+										</div>
+									</div>
+		            <% end %>              
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+	$('#color-panel').minicolors({
+		theme: 'bootstrap', 
+		// defaultValue: '#b3b3b2',
+		letterCase: 'uppercase',
+		position: 'bottom left'
+	});
+
+	function icheck(){
+	  if($(".icheck-me").length > 0){
+	    $(".icheck-me").each(function(index){
+	    	var $el = $(this);
+
+	    	if (index == 0){ $el.attr('checked', true) }; //checked the first by default
+	      
+	      var skin = ($el.attr('data-skin') !== undefined) ? "_" + $el.attr('data-skin') : "",
+	      color = ($el.attr('data-color') !== undefined) ? "-" + $el.attr('data-color') : "";
+	      var opt = {
+	        checkboxClass: 'icheckbox' + skin + color,
+	        radioClass: 'iradio' + skin + color,
+	      }
+	      $el.iCheck(opt);
+	    });
+	  }
+	}
+
+	$(function(){ icheck() });
+</script>
+
+

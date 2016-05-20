@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  how_we_meet: MyString
+  first_date: MyString
+  proposal: MyString
+  site_id: 
+
+two:
+  how_we_meet: MyString
+  first_date: MyString
+  proposal: MyString
+  site_id: 

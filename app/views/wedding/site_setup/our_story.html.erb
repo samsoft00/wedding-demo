@@ -1,0 +1,55 @@
+<div class="main-container">
+  <div class="container">
+  <h2>Side Menu</h2>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="side-nav" id="leftCol">
+        <div class="hide-side" style="">
+          <ul class="listnone nav affix-top" id="sidebar">
+            <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> How it works</a></li>
+            <li class="active"><a href="#aboutus">Choose Template</a></li>
+            <li><a href="#">Couple Information</a></li>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Theme Slider</a></li>
+            <li><a href="#">Gallary</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 widget">
+      <div class="well-box">
+
+		    <div class="row thumb_holder">
+		      <div class="col-md-12">
+	          <div class="row">
+	            <div class="col-md-12">
+	              <h2 class="gd-title">Our Story</h2>
+	            </div>
+
+							<%= form_for(@our_story, url: wizard_path, method: :put, class: "form-horizontal") do |f| %>
+							  <div class="form-group">
+								  <%= f.label :how_we_meet, class: "control-label" %>
+								  <%= f.text_area :how_we_meet, class: "form-control", size: "x5" %>
+							  </div>
+							  <div class="form-group">
+							    <%= f.label :first_date, class: "control-label" %>
+								  <%= f.text_area :first_date, class: "form-control", size: "x5" %>
+							  </div>
+							  <div class="form-group">
+							    <%= f.label :proposal, class: "control-label" %>
+								  <%= f.text_area :proposal, class: "form-control", size: "x5" %>
+							  </div>
+							  <div class="actions">
+							    <%= f.submit "Continue" %>
+							  </div>
+							<% end %>
+
+	          </div>
+		      </div>
+
+      	</div>
+    	</div>
+  	</div>
+	</div>
+	</div>
+</div>

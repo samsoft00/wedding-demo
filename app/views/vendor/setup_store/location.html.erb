@@ -1,0 +1,62 @@
+<div class="main-container">
+  <div class="container">
+  <h2>Side Menu</h2>
+  <div class="row">
+    <div class="col-md-3">
+    	<%= tutorial_progress_bar %>
+    </div>
+    <div class="col-md-9 widget">
+      <div class="well-box">
+
+		    <div class="row thumb_holder">
+		      <div class="col-md-12">
+	          <div class="row">
+	            <div class="col-md-12">
+	              <h2 class="gd-title">Address</h2>
+	            </div>
+
+							<%= form_for(@profile, url: wizard_path, method: :put, class: "form-horizontal") do |f| %>
+							  
+							  <% if f.object.errors.any? %>
+							    <div class="error_messages">
+							      <% f.object.errors.full_messages.each do |error| %>
+							        <p><%= error %></p>
+							      <% end %>
+							    </div>
+							  <% end %>
+
+							  <div class="form-group">
+							    <%= f.label :address, "Address", class: "control-label" %><br>
+							    <%= f.text_area :address, class: "form-control", placeholder: "Address", autofocus: true, autocomplete: "off" %>
+							  </div> 							
+							  <div class="form-group">
+							    <div class="row">
+							      <div class="col-sm-4">
+							        <%= f.label :city, class: "control-label" %>
+							        <%= f.text_field :city, class: "form-control", placeholder: "Enter City", autofocus: true, autocomplete: "off" %>
+
+							      </div>
+							      <div class="col-sm-4">
+							        <%= f.label :state, class: "control-label" %><br>
+							        <%= f.text_field :state, class: "form-control", placeholder: "Enter State", autocomplete: "off" %>
+							      </div>
+							      <div class="col-sm-4">
+							        <%= f.label :country, class: "control-label" %><br>
+							        <%= f.country_select :country, options = {selected: "NG"}, html_options = {class: "form-control selectpicker"} %>
+							      </div>       
+							    </div>   
+							  </div>
+							  <div class="actions">
+							    <%= f.button "Submit", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."} %>
+							  </div>
+							<% end %>
+
+	          </div>
+		      </div>
+
+      	</div>
+    	</div>
+  	</div>
+	</div>
+	</div>
+</div>

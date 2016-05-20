@@ -1,0 +1,50 @@
+<div class="form-group nested-fields col-sm-12 col-md-6">
+	<div class="well" style="border: none;border-radius: 0px;">
+		<%= link_to_remove_association '<div class="btn btn-danger pull-right" style="height:30px;margin-bottom:10px;clear:both"><span class="glyphicon glyphicon-remove"></span> Remove</div>'.html_safe, f %>
+		<div class="form-group">
+		  <%= f.label :event_type,"Select Event Name", class: "control-label" %><br/>
+		  <%= f.select(:event_type, options_for_select([['Reception', 'reception'], ['Wedding', 'wedding'], ['Traditional Wedding', 'traditional wedding'], ['Dancing Rehearsal', 'dancing rehearsal']]),{}, class: "form-control selectpicker bs-select-hidden") %>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+				  <%= f.label :date, class: "control-label" %>
+				  <div class='input-group date event-date'>
+				  	<%= f.text_field :date, class: "form-control" %>
+		          <span class="input-group-addon">
+		              <span class="glyphicon glyphicon-calendar"></span>
+		          </span>
+				  </div>
+				</div>				
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+				  <%= f.label :from, class: "control-label" %><br/>
+	          <div class='input-group date from'>
+				  	<%= f.text_field :from, class: "form-control" %>
+		          <span class="input-group-addon">
+		              <span class="glyphicon glyphicon-time"></span>
+		          </span>
+		        </div>	  
+				</div>
+				<div class="col-md-6 col-sm-12">
+				  <%= f.label :to, class: "control-label" %>
+				  <div class='input-group date to'>
+				  	<%= f.text_field :to, class: "form-control" %>
+		          <span class="input-group-addon">
+		              <span class="glyphicon glyphicon-time"></span>
+		          </span>
+				  </div>		
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= f.label :venue, "How to Reach ?", class: "control-label" %>
+		  <%= f.text_area :venue, class: "form-control", :placeholder => "Wedding Location Address with full description", :size => "x3" %>
+		</div>
+
+	</div>
+
+</div>

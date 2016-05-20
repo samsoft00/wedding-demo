@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Groom name:</strong>
+  <%= @site.groom_name %>
+</p>
+
+<p>
+  <strong>Bride name:</strong>
+  <%= @site.bride_name %>
+</p>
+
+<p>
+  <strong>About groom:</strong>
+  <%= @site.about_groom %>
+</p>
+
+<p>
+  <strong>About bride:</strong>
+  <%= @site.about_bride %>
+</p>
+
+<p>
+  <strong>Wedding date:</strong>
+  <%= @site.wedding_date %>
+</p>
+
+<p>
+  <strong>Photographer:</strong>
+  <%= @site.photographer %>
+</p>
+
+<p>
+  <strong>Event planner:</strong>
+  <%= @site.event_planner %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @site.user %>
+</p>
+
+<p>
+  <strong>Template:</strong>
+  <%= @site.template %>
+</p>
+
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<%= link_to 'Back', sites_path %>

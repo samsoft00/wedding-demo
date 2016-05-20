@@ -1,0 +1,16 @@
+  <div class="col-md-2 col-sm-2 hidden-xs">
+    <div class="user-pic"> <%= image_tag @review.user.profile.avatar.url(:normal), class:"img-responsive img-circle", alt:"" %> </div>
+  </div>
+  <div class="col-md-10 col-sm-10">
+    <div class="panel panel-default arrow left">
+      <div class="panel-body">
+        <div class="text-left">
+          <div class="waiting-approval">Thanks. Review submitted successfully, Waiting for approval!</div>
+        </div>
+        <div class="review-post">
+          <p><%= h(@review.comment).gsub(/\n/, '<br/>').html_safe %></p>
+        </div>
+        <div class="review-user">By <%= link_to @review.user.username, user_profile_path(@review.user.username) %>, on <span class="review-date"></span><%= @review.created_at.strftime("%B %d, %Y") %></div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,112 @@
+<%= form_for(@profile, vendor_profile_path(@profile), html: { multipart: true }) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "control-label" %><br>
+    <%= f.text_field :name, class: "form-control", placeholder: "Enter Name", autofocus: true, autocomplete: "off" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :business_name, "Company Name", class: "control-label" %><br>
+    <%= f.text_field :business_name,class: "form-control", placeholder: "Enter Business Name", autofocus: true, autocomplete: "off" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :about, "About Company", class: "control-label" %><br>
+    <%= f.text_area :about, class: "form-control", placeholder: "About Company", autofocus: true, autocomplete: "off" %>
+  </div>  
+  <div class="form-group">
+    <%= f.label :phone, class: "control-label" %><br>
+    <%= f.text_field :phone,class: "form-control", placeholder: "Enter Phone Number", autofocus: true, autocomplete: "off" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :category_id, "Type of Business", class: "control-label" %><br>
+    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category", class: "form-control selectpicker" %>
+  </div> 
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-6">
+        
+        <%= f.label :website, class: "control-label" %>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-globe fa-lg"></i></span>
+          <%= f.text_field :website, class: "form-control", placeholder: "Enter Website", autofocus: true, autocomplete: "off" %>
+        </div>        
+
+      </div>
+
+      <div class="col-sm-6">
+      <%= f.label :instagram, class: "control-label" %>
+        <div class="input-group">
+          <span class="input-group-addon">https://</span>
+          <%= f.text_field :instagram, class: "form-control", placeholder: "Enter Instagram", autofocus: true, autocomplete: "off" %> 
+        </div>       
+      </div>
+    </div>
+  </div> 
+  
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-6">
+
+        <%= f.label :twitter, class: "control-label" %>
+        <div class="input-group">
+          <span class="input-group-addon">https://</span>
+          <%= f.text_field :twitter, class: "form-control", placeholder: "Enter Twitter", autofocus: true, autocomplete: "off" %>
+        </div>
+
+      </div>
+      <div class="col-sm-6">
+        <%= f.label :facebook, class: "control-label" %><br>
+        <div class="input-group">
+          <span class="input-group-addon">https://</span>
+          <%= f.text_field :facebook, class: "form-control", placeholder: "Enter Facebook", autofocus: true, autocomplete: "off" %>
+          </div>
+      </div> 
+    </div>   
+  </div>
+
+  <div class="form-group">
+    <%= f.label :avatar, "Business Logo", class: "control-label" %>
+    <%= f.file_field :avatar, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, class: "control-label" %><br>
+    <%= f.text_area :address, class: "form-control", placeholder: "Enter Address", autofocus: true, autocomplete: "off" %>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-4">
+        <%= f.label :city, class: "control-label" %>
+        <%= f.text_field :city, class: "form-control", placeholder: "Enter City", autofocus: true, autocomplete: "off" %>
+
+      </div>
+      <div class="col-sm-4">
+        <%= f.label :state, class: "control-label" %><br>
+        <%= f.text_field :state, class: "form-control", placeholder: "Enter State", autofocus: true, autocomplete: "off" %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.label :country, class: "control-label" %><br>
+        <%= f.country_select :country, class: "form-control", placeholder: "Select Country", autofocus: true, autocomplete: "off", selected: "NG" %>
+      </div>       
+    </div>   
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <%= recaptcha_tags %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.button "Create Profile", class: "btn btn-success btn-lg btn-block", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."} %>
+  </div>
+<% end %>

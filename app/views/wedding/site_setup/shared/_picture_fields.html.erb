@@ -1,0 +1,16 @@
+<div class="col-xs-6 col-md-4 nested-fields">
+  <a class="thumbnail">
+  	<% if f.object.new_record? %>
+  		<%= image_tag "vendor-1.jpg", alt:"" %>
+  	<% else %>
+  		<%= attachment_image_tag(f.object, :image, :fill, 300, 200) %>
+  	<% end %>
+  </a>
+  <div class="row">
+    <div class="col-sm-12">
+    	<%= f.attachment_field :image, class: "filestyle"  %>
+      
+    </div>
+  </div>
+  <%= link_to_remove_association 'Remove', f %>
+</div>

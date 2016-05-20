@@ -1,0 +1,81 @@
+<div class="spacer feature-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+				<!-- Menu -->
+				<%= render :partial => "conversations/conversation_nav" %>
+
+			</div>
+
+			<div class="col-md-10">
+
+				<div class="row">
+					<header class="db-header header-nobot p-b-15 cf">
+          	<h1 class="alt">
+              <span class="user-pict-65">
+									<%= image_tag @recipient.profile.avatar.url(:normal), alt:"#{@recipient.username}", class:"img-responsive img-circle", :width=>"75", :height=>"75" %>
+              	</span>
+              	<%= link_to "#{@recipient.username}", user_profile_path(@recipient.username) %>
+            </h1>
+          </header>
+				</div>
+				<!-- Index -->
+				<div class="panel">
+				  <div class="panel-body">
+					<% if @conversations.size > 0 %>
+		        <div class="inbox-body">
+	            <table class="table table-inbox table-hover">
+	              <tbody>
+									<% @conversations.each do |conversation| %>
+										<p><%= conversation.subject %></p>
+										<% conversation.receipts_for(current_user).each do |receipt| %>
+								    <tr class="unread">
+								        <td class="inbox-small-cells">
+								            <input type="checkbox" class="mail-checkbox">
+								        </td>
+								        <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+								        <td class="view-message"><%= image_tag receipt.message.sender.profile.avatar.url(:normal), :width => "55", class: "img-responsive img-circle" %></td>
+								        <td class="view-message  dont-show"><%= receipt.message.sender.username %></td>
+								        <td class="view-message "><%= receipt.message.body %></td> <!-- message -->
+								        <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+								        <td class="view-message  text-right">9:27 AM</td> <!-- time -->
+								    </tr>
+								    <% end %>
+								  <% end %>
+	            </tbody>
+	            </table>
+		        </div>
+						<hr/>
+					<% end %>
+					<%= form_for @message, url: post_new_conversation_conversations_path, remote: true, method: :post, id: 'conversation-text-field' do |f|%>
+						<!-- form for conversation -->
+						<div class="form-group">
+							<%= f.label :body, "Send message to #{@recipient.username}" %>
+							<%= f.text_area :body, 
+																placeholder: "Type message...", 
+																size: "x5", class: "form-control conversation-box" %>
+						</div>
+						<%= f.hidden_field :conversation, value: @conversations.size %> 
+						<div class="form-group">
+							<%= button_tag(type: :submit, class: "btn btn-lg btn-success pull-right", 
+															data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."}) do %>
+								<i class="fa fa-send"></i> Send Message
+
+							<% end %>
+						</div>
+					<% end %>
+				  </div>
+				</div>				
+
+			</div>
+		</div>
+	</div>
+</div>	
+
+<script>
+   $('#conversation-box').summernote({ 
+      // height: 100,
+      toolbar: false,
+      disableDragAndDrop: false,
+    });	
+</script>
