@@ -15,7 +15,7 @@ gem "font-awesome-rails"
 gem 'devise', '~> 3.5', '>= 3.5.6'
 gem "recaptcha", require: "recaptcha/rails"
 gem "twitter-bootstrap-rails"
-# gem "paperclip", "~> 4.3"
+gem "paperclip", "~> 4.3"
 gem 'figaro'
 gem 'country_select'
 gem 'friendly_id', '~> 5.1.0'
@@ -43,6 +43,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 gem 'icheck-rails'
 gem 'refile', '~> 0.6.2', github: 'refile/refile', require: "refile/rails"
 gem "refile-mini_magick"
+# gem "refile-s3"
 gem 'high_voltage', '~> 3.0'
 # gem "refile", require: ["refile/rails", "refile/image_processing"]
 # Use ActiveModel has_secure_password
