@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   
   helper_method :getVendorAddress, :is_site_active?
-  theme :theme_resolver
+  # theme :theme_resolver
 
 	#def after_sign_in_path_for(resource_or_scope)
 	 #check request.referer then redirect.
