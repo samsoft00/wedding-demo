@@ -278,7 +278,7 @@ GEM
     will_paginate (3.0.7)
 
 PLATFORMS
-  x64-mingw32
+  
 
 DEPENDENCIES
   bootstrap-filestyle-rails
