@@ -277,8 +277,7 @@ GEM
       railties (>= 3.0.7)
     will_paginate (3.0.7)
 
-PLATFORMS
-  
+
 
 DEPENDENCIES
   bootstrap-filestyle-rails
