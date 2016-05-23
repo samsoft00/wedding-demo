@@ -49,8 +49,6 @@ test:
 #
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
   database: wedding_production
   username: wedding
   password: <%= ENV['WEDDING_DATABASE_PASSWORD'] %>
