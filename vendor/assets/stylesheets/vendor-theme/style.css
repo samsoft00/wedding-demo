@@ -47,10 +47,10 @@ a { color: #00aeaf;	text-decoration: none; -webkit-transition: all 0.3s; -moz-tr
 a:focus, a:hover { color: #f9a630; text-decoration: none;}
 hr { margin-top: 20px; margin-bottom: 20px; border: 0;border-top: 1px solid #e9e6e0;}
 /*--------------------
-	Form Field  
+	Form Field 
 ---------------------*/
 input.form-control { height: 48px; background-color: #fdfdfb; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; border: 1px solid #e9e6e0; -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075); box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075); font-family: 'Montserrat', sans-serif;}
-select.form-control { height: 48px; background-color: #fdfdfb; margin-bottom: 0px; border: 1px solid #e9e6e0; color: #2b212f; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; color: #706a68; -webkit-appearance: none; -moz-appearance: none; background-position: 95% 50%; background-repeat: no-repeat; background-image:  url(arrow.png); padding-right: 15px; -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075); box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075); font-family: 'Montserrat', sans-serif; }
+select.form-control { height: 48px; background-color: #fdfdfb; margin-bottom: 0px; border: 1px solid #e9e6e0; color: #2b212f; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; color: #706a68; -webkit-appearance: none; -moz-appearance: none; background-position: 95% 50%; background-repeat: no-repeat; background-image:  asset-url(arrow.png); padding-right: 15px; -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075); box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075); font-family: 'Montserrat', sans-serif; }
 textarea.form-control{background-color: #fdfdfb;-webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; border: 1px solid #e9e6e0; -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075); box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075);}
 label.control-label{font-size: 13px; font-family: 'Montserrat', sans-serif; color: #706a68; font-weight: normal;}
 button.tp-btn-primary{height: 48px;}
@@ -225,9 +225,9 @@ ul.listnone{list-style: none; margin: 0px; }
 .venue-info{ background-color: #fcfbf9; border-top: 1px solid #e9e6e0; height: 84px; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-weight: 700;}
 /*-------Thumbnail Label------*/ 
 .popular-label, .rated-label, .feature-label{ text-align: center; position: absolute; top: 0px; width: 72px; height: 72px;}
-.popular-label{ background: url(popular.png) 0px 0px;}
-.rated-label{ background: url(top-rated.png) 0px 0px;}
-.feature-label{ background: url(feature-label.png) 0px 0px;} 
+.popular-label{ background: asset-url(popular.png) 0px 0px;}
+.rated-label{ background: asset-url(top-rated.png) 0px 0px;}
+.feature-label{ background: asset-url(feature-label.png) 0px 0px;} 
  /*------- Vendor Thumbnail Simple --------*/
 .vendor-box{ margin-bottom: 30px;overflow: hidden; position: relative;}
 .vendor-box .rating {}
@@ -806,7 +806,7 @@ section.module p:last-child { margin-bottom: 0;}
 section.module.content { padding: 40px 0; }
 section.module.parallax { height: 600px; background-position: 50% 50%; background-repeat: no-repeat; background-attachment: fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;}
 section.module.parallax h1 { color: #fff; font-size: 48px; font-weight: 700; text-align: center;}
-section.module.parallax-2 { background-image: url("woo-parallax.jpg");}
+section.module.parallax-2 { background-image: asset-url("woo-parallax.jpg");}
 /*---------- parallax caption ----------*/
 .parallax-caption{margin-top: 10%;text-align: center; border:1px solid #fff; padding: 60px 80px;}
 .category-section{margin-top: 40px; margin-bottom: 80px;}
@@ -1380,7 +1380,7 @@ figure.effect-oscar:hover img {
 	Dashboard Pages
 -------------------------------------*/
 /*------ Page Header ------------*/
-.tp-dashboard-head{ background:url(dashboard-page-header.jpg);background-position: center; -webkit-background-size: cover; -moz-background-size: cover; background-size: cover; -o-background-size: cover;}
+.tp-dashboard-head{ background:asset-url(dashboard-page-header.jpg);background-position: center; -webkit-background-size: cover; -moz-background-size: cover; background-size: cover; -o-background-size: cover;}
 .tp-dashboard-head .profile-header{ border: none; padding: 60px 0px;}
 .tp-dashboard-head .profile-header h1{color: #fff;}
 .tp-dashboard-head .profile-info{ padding-top: 45px;}

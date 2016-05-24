@@ -308,7 +308,7 @@ DEPENDENCIES
   recaptcha
   refile (~> 0.6.2)!
   refile-mini_magick
-  sass-rails (~> 5.0)
+  sass-rails (~> 5.0, >= 5.0.4)
   sdoc (~> 0.4.0)
   select2-rails
   summernote-rails
