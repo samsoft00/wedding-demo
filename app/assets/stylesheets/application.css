@@ -12,10 +12,22 @@
  *
  *= require jquery.minicolors
  *= require icheck/square/blue
- *= require custom
+ *= require vendor-theme/bootstrap.min
+ *= require bootstrap-datetimepicker
+ *= require vendor-theme/style
+ *= require vendor-theme/owl.carousel
+ *= require vendor-theme/owl.theme
+ *= require vendor-theme/owl.transitions
+ *= require vendor-theme/bootstrap-select.min
  *= require listings
- *= require site_setup
- *= require sites
+ *= require font-awesome
+ *= require conversation
+ *= require jquery.minicolors
+ *= require select2
+ *= require select2-bootstrap
+ *= require jquery.raty
+ *= require chosen
+ *= require ImageSelect
  *= require_tree .
  *= require_self
  */
