@@ -1,9 +1,3 @@
-/* line 1, C:/Ruby21/workspace/wedding/app/assets/stylesheets/listings.css.scss */
-.waiting-approval {
-  color: #bbb;
-  font-weight: 600;
-  font-style: italic;
-}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -16,23 +10,24 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
-
-
+ *= require jquery.minicolors
+ *= require icheck/square/blue
+ *= require vendor-theme/bootstrap.min
+ *= require bootstrap-datetimepicker
+ *= require vendor-theme/style
+ *= require vendor-theme/owl.carousel
+ *= require vendor-theme/owl.theme
+ *= require vendor-theme/owl.transitions
+ *= require vendor-theme/bootstrap-select.min
+ *= require listings
+ *= require font-awesome
+ *= require conversation
+ *= require jquery.minicolors
+ *= require select2
+ *= require select2-bootstrap
+ *= require jquery.raty
+ *= require chosen
+ *= require ImageSelect
+ *= require_tree .
+ *= require_self
  */
-
-@import "bootstrap-sprockets";
-/*@import "bootstrap";*/
-@import "vendor-theme/bootstrap.min";
-@import 'bootstrap-datetimepicker';
-@import "vendor-theme/style";
-@import "vendor-theme/owl.carousel";
-@import "vendor-theme/owl.theme";
-@import "vendor-theme/owl.transitions";
-@import "vendor-theme/bootstrap-select.min";
-@import "listings";
-@import "font-awesome";
-@import "conversation";
-
-@import "select2";
-@import "select2-bootstrap";
-@import "jquery.raty";
