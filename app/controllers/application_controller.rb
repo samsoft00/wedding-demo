@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   
-  helper_method :getVendorAddress, :is_site_active?
+  helper_method :getVendorAddress, :is_site_active?, :permitted_to?
   # theme :theme_resolver
 
 	#def after_sign_in_path_for(resource_or_scope)
@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
 
 	def getVendorAddress(profile)
 		profile.address+' '+profile.city+ ', '+profile.state
+	end
+
+	def permitted_to? listing
+		current_user.id == listing.user_id
 	end
 
 	protected

@@ -43,12 +43,15 @@ class ListingsController < ApplicationController
     @listing = Listing.new(listing_params)
     @listing.user_id = current_user.id
     @listing.profile_id = current_user.profile.id
-    @listing.status = params[:status].nil? ? 'pending' : 'draft'
+    # @listing.status = params[:status].nil? ? 'pending' : 'draft'
 
     respond_to do |format|
       if @listing.save
+        @listing.update(status: 'draft') if saving_as_draft?
+        @listing.update(status: 'pending') if publishing?#waiting for admin to verify (active)
+
         @listing.category_ids=(params[:category]) unless params[:category].empty? or params[:category].nil?
-        format.html { redirect_to display_vendor_listing(current_user.username, @listing), notice: 'Listing was successfully created.' }
+        format.html { redirect_to display_vendor_listing_path(current_user.username, @listing), notice: 'Listing was successfully created.' }
         format.json { render :show, status: :created, location: @listing }
       else
         format.html { render :new }
@@ -60,6 +63,7 @@ class ListingsController < ApplicationController
   # PATCH/PUT /listings/1
   # PATCH/PUT /listings/1.json
   def update
+    @listing.status = 'draft' if Unpublish?
     respond_to do |format|
       if @listing.update(listing_params)
         @listing.category_ids=(params[:category]) unless params[:category].empty? or params[:category].nil?
@@ -107,6 +111,18 @@ class ListingsController < ApplicationController
       if params[:username].present? && current_user.username != params[:username]
         redirect_to :action => :index, :username => current_user.username
       end
+    end
+
+    def publishing?
+      params[:commit] == "Publish"
+    end
+
+    def saving_as_draft?
+      params[:commit] == "Safe as Draft"
+    end
+
+    def Unpublish?
+      params[:commit] == "Unpublish"
     end
 
 

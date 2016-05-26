@@ -59,10 +59,11 @@
 							  </div>
 							  <div class="form-group">
 							    <%= f.label :category_id, "Type of Business", class: "control-label" %>
-							    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category", class: "form-control selectpicker" %>
+							    <%= f.collection_select :category_id, Category.all, :id, :name, options = {prompt: "Select Category"}, html_options = {class: "form-control selectpicker"} %>
 							  </div> 
-							  <div class="actions">
-							    <%= f.button "Continue", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."} %>
+							  <hr/>
+							  <div class="form-group">
+							    <%= f.button "Continue", class: "btn btn-success btn-lg", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."} %>
 							  </div>
 							<% end %>
 

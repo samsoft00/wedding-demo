@@ -45,7 +45,7 @@
           </div>
         </div>
         <%= link_to "Contact #{@listing.profile.business_name}", show_user_conversation_conversations_path(@listing.user.username, :related_listing_id => @listing.id), class: "btn tp-btn-default tp-btn-lg btn-block" %>
-        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-md-8">
@@ -233,13 +233,17 @@
             <div class="profile-usertitle-name">
               <h2><%= @listing.profile.name %></h2>
             </div>
-            <div class="profile-address"> <i class="fa fa-map-marker"></i> <%= truncate(@listing.profile.address) %> </div>
+            <div class="profile-address"> <i class="fa fa-map-marker"></i> <%= truncate(@listing.profile.address) %>
+            </div>
             <div class="profile-email"> <i class="fa fa-envelope"></i> <%= @listing.user.email %> </div>
             <div class="profile-address"> <i class="fa fa-phone"></i> <%= @listing.profile.phone %> </div>
             <% if @listing.profile.website.present? %>
               <div class="profile-website"> <i class="fa fa-link"></i> <a href="#"><%= @listing.profile.website %></a> </div>
             <% end %>
             </div>
+            <% if permitted_to? @listing %>
+              <%= link_to "Edit Profile", {}, class:"btn btn-success" %>          
+            <% end %>
         </div>
 
       </div>
