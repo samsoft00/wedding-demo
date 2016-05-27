@@ -67,6 +67,8 @@
             <li><%= link_to "Are you vendor?",  vendor_sign_up_path %></li>
             <li><%= link_to "Log in",  new_user_session_path %></li>
           <% end %>
+          <li> <%= link_to "Faqs", faqs_path %></li>
+          <li> <%= link_to "Contact Us", contact_us_path %></li>
           <!-- <a href="">Log in</a> -->
           <li><a role="button" data-toggle="collapse" href="#searcharea" aria-expanded="false" aria-controls="searcharea"> <i class="fa fa-search"></i> </a></li>
         </ul>
@@ -109,12 +111,24 @@
           <li class="dropdown mega-dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Features <span class="fa fa-angle-down"></span></a>
           </li>
           -->
+          <style type="text/css">
+            .nav-userpic img{
+              width: 50px
+            }
+          </style>
           
           <!-- /.Mega Dropdown -->
           <li> <%= link_to "Find Vendor", vendor_search_index_path %></li>
           <li> <%= link_to "Add Listings", wedding_site_setup_index_path %></li>
-          <li> <%= link_to "Faqs", faqs_path %></li>
-          <li> <%= link_to "Contact Us", contact_us_path %></li>                    
+          <% if user_signed_in? %>
+            <li role="presentation">
+
+              <div class="profile-userpic nav-userpic">
+                <%= image_tag attachment_url(current_user.profile, :profile_image, :fill, 50, 50, fallback: "profile_user.jpg", :class => "profile-image") %>
+              </div>
+
+            </li>
+          <% end %>                       
         </ul>
       </div>
       
@@ -122,8 +136,46 @@
     </nav>
   </div>
   <!-- /.container-fluid --> 
-  
+  <style type="text/css">
+    .category-nav{
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+    .category-nav .nav-tabs{
+      border-bottom:none;
+    }
+    .category-nav a{
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    .category-nav .nav-tabs li a:hover{
+      border-color: none;/* #eee #eee #ddd */
+      border-radius: 0px;
+    }
+    .tp-nav .dropdown-menu {
+      border: none;
+      border-radius: 0px; 
+    } 
+  </style>
+  <div class="category-nav">
+    <div class="container">
+
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Dropdown <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            
+          </ul>
+        </li>
+        <li role="presentation" class=""><a href="#">Disabled link</a></li>
+      </ul>
+
+    </div>
+  </div>
+
 </div><!-- navigation end -->
+
 
 <%= yield %>
 

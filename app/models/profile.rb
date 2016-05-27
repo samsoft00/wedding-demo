@@ -25,6 +25,9 @@ class Profile < ActiveRecord::Base
 
   attachment :profile_image, type: :image
 
+  def done?
+    self.status == 'active'
+  end
 
   private
 

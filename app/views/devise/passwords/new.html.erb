@@ -1,3 +1,28 @@
+<!-- <div class="tp-page-head">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1>Login Page</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- /.page header -->
+<div class="tp-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">Login Page</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="main-container">
   <div class="container">
     <div class="row">
@@ -6,32 +31,30 @@
       
       </div>
       <div class="col-md-offset-3 col-md-6 st-tabs"> 
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <!-- <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Vendor Login </a></li> -->
-          <!-- <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Couple login</a></li> -->
-        </ul>
-        
-        <!-- Tab panes -->
-        <div class="tab-content ">
-          <div role="tabpanel" class="tab-pane active vendor-login" id="home">
+
+      <div class="panel panel-default" style="border-radius: 0px;">
+        <div class="panel-heading">Forgot your password?</div>
+        <div class="panel-body">
          
-            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-            	<%= devise_error_messages! %>
-              <div class="form-group">
-                <%= f.label :email, class: "control-label" %><br />
-                <%= f.email_field :email, autofocus: true, placeholder: "E-Mail", class: "form-control input-md", required: true, autocomplete: "off" %> 
-              </div>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          	<%= devise_error_messages! %>
+            <div class="form-group">
+              <%= f.label :email, class: "control-label" %><br />
+              <%= f.email_field :email, autofocus: true, placeholder: "E-Mail", class: "form-control input-md", required: true, autocomplete: "off" %> 
+            </div>
 
-              <div class="actions">
-                <%= f.button "Send me reset password instructions", class: "btn tp-btn-primary tp-btn-lg" %>
-              </div>
-            <% end %>
+            <div class="form-group">
+              <%= f.button "Send me reset password instructions", class: "btn tp-btn-primary tp-btn-lg btn-block" %>
+            </div>
+          <% end %>
 
-            <%= render "devise/shared/links" %>
+          <hr/>
+
+          <%= render "devise/shared/links" %>
               
           </div>
         </div>
+
       </div>
     </div>
   </div>

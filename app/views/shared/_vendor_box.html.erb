@@ -1,0 +1,16 @@
+<!-- venue box start-->
+<div class="vendor-image"><!-- venue pic --> 
+  <a href="#"><%= attachment_image_tag(user_listing.pictures.first, :image, :fill, 715, 400, class: "img-responsive") %></a> </div>
+<!-- /.venue pic -->
+<div class="vendor-detail"><!-- venue details -->
+  <div class="caption"><!-- caption -->
+    <h2><a href="" class="title"><%= user_listing.name %></a></h2>
+    <p class="location"><i class="fa fa-map-marker"></i> <%= @user.profile.address %> </p>
+    <div class="rating pull-left"><span class="star-rating" data-score= <%= user_listing.rate %> ></span><span class="rating-count">(<%= "#{user_listing.reviews.length}" %>)</span> </div>
+  </div>
+  <!-- /.caption -->
+  <div class="vendor-price">
+    <div class="price">$600</div>
+  </div>
+</div>
+<!-- venue details -->  

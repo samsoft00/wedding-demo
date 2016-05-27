@@ -57,7 +57,7 @@ gem 'high_voltage', '~> 3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  # gem 'byebug'
+  gem 'byebug'
 	# Use mysql as the database for Active Record
 	gem 'mysql2', '>= 0.3.13', '< 0.5'   
 end

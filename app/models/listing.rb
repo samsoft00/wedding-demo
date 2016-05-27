@@ -30,7 +30,7 @@ class Listing < ActiveRecord::Base
 	scope :draft, -> { where(:status => 'draft') }
 	scope :denied, -> { where(:status => 'denied') }
 	scope :paused, -> { where(:status => 'paused') }
-
+ 
   def check_listing_params
     if self.new_record?
       self.pricing_and_faq = '' if self.pricing_and_faq.blank?

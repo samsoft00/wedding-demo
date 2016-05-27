@@ -1,5 +1,5 @@
-class CategoriesController < ApplicationController
-	skip_before_action :authenticate_user!, only: [:index]
+class Vendor::CategoriesController < ApplicationController
+	skip_before_action :authenticate_user!, only: [:index, :listing_categories]
 	helper_method :listing_category
 
 	def index

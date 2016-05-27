@@ -1,0 +1,59 @@
+<div id="slider" class="owl-carousel owl-theme slider">
+  <div class="item"><%= image_tag "slider-one.jpg", alt: "Wedding Dresses" %>
+    <div class="container">
+      <div class="col-md-6">
+        <div class="slider-caption">
+          <h1>2016 Wedding Collection</h1>
+          <p>Years of making experience to let you own a unique wonderful wedding time</p>
+          <a href="#" class="btn tp-btn-primary">Shop now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item"><%= image_tag "slider-two.jpg", alt: "Wedding Dresses" %>
+    <div class="container">
+      <div class="col-md-6">
+        <div class="slider-caption">
+          <h1>Get up to 10% off on new Arrivals</h1>
+          <p>Years of making experience to let you own a unique wonderful wedding time</p>
+          <a href="#" class="btn tp-btn-primary">Shop now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item"><%= image_tag "slider-three.jpg", alt: "Wedding Dresses" %>
+    <div class="container">
+      <div class="col-md-6">
+        <div class="slider-caption">
+          <h1>2016 Wedding Ring Collection</h1>
+          <p>Years of making experience to let you own a unique wonderful wedding time</p>
+           
+          <a href="#" class="btn tp-btn-primary">Shop now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid spacer">
+  <div class="row">
+      <div class="col-md-12 tp-title-center">
+      <h1>Product Categories</h1>
+    </div>
+  </div>
+  <div class="row category-section">
+
+    <% @category.each do |category| %>
+    
+    <div class="col-md-3 product-category">
+      <div class="category-thumb post-image">
+        <a href=<%= "/categories/#{category.slug}"%> ><%= image_tag "wedding-dresses.jpg" %></a>
+        <a href=<%= "/categories/#{category.slug}" %> class="btn tp-btn-default btn-label">
+          <%= "Wedding #{category.name}" %> <i class="fa fa-arrow-circle-right"></i>
+        </a> 
+      </div>
+    </div>
+    
+    <% end %>
+
+  </div>
+</div>

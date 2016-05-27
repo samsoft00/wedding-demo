@@ -1,0 +1,170 @@
+<div class="tp-page-head"><!-- page header -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1>Flower Vendor</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.page header -->
+<div class="tp-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">Flower Vendor </li>
+        </ol>
+      </div>
+       
+    </div>
+  </div>
+</div>
+<div class="main-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 tp-title">
+        <h2>(12) Flower Vendor </h2>
+      </div>
+      <div class="col-md-4 text-right">
+        <div class="btn-group">
+            <a href="#" id="list" class="btn list-btn btn-sm"><span class="fa fa-th-list">
+            </span> </a> <a href="#" id="grid" class="btn  grid-btn active  btn-sm"><span
+                class="fa fa-th"></span> </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <%= render :partial => "categories/#{listing_category}_refine_search", listing: @listing %>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="well-box feature-left">
+              <div class="row">
+              <div class="col-md-2 feature-icon"><%= image_tag "florist-icon.svg", alt:"" %></div>
+              <div class="col-md-10 feature-info"><h1>Wedding Listings</h1>
+
+              <p> Flowers often play a major role in conveying the style of a wedding and help make it memorable and beautiful.</p></div>
+</div>
+            </div>
+            </div>
+          <% @listings.each do |listing| %>
+            <div class="col-md-4 vendor-box"><!-- venue box start-->
+              <div class="vendor-image"><!-- venue pic -->
+                <a href="#"><%= attachment_image_tag(listing.pictures.first, :image, :fill, 715, 400, class:"img-responsive") %></a>
+                <div class="popular-label"></div><div class="favourite-bg"><a href="#" class=""><i class="fa fa-heart"></i></a></div>
+              </div>
+              <!-- /.venue pic -->
+              <div class="vendor-detail"><!-- venue details -->
+                <div class="caption"><!-- caption -->
+                  <h2>
+                    <%= link_to listing.name, display_vendor_listing_path(listing.user.username, listing.slug), class: "title" %></h2>
+                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <span class="rating-count">(22)</span> </div>
+                </div>
+                <!-- /.caption -->
+                <!--
+                <div class="vendor-price">
+                  <div class="price">$390 - $600</div>
+                </div>
+                -->
+              </div>
+              <!-- venue details --> 
+            </div>
+          <% end %>
+
+          <div class="col-md-4 vendor-box"><!-- venue box start-->
+            <div class="vendor-image"><!-- venue pic --> 
+              <a href="#"><%= image_tag "vendor-2.jpg", alt:"wedding venue", class:"img-responsive" %></a>
+              <div class="rated-label"></div><div class="favourite-bg"><a href="#" class=""><i class="fa fa-heart"></i></a></div>
+            </div>
+            <!-- /.venue pic -->
+            <div class="vendor-detail"><!-- venue details -->
+              <div class="caption"><!-- caption -->
+                <h2><a href="#" class="title">Vendor Florist Title</a></h2>
+                <p class="location"><i class="fa fa-map-marker"></i> Street Address, Name of Town, 12345, Country.</p>
+                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <span class="rating-count">(22)</span> </div>
+              </div>
+              <!-- /.caption -->
+              <div class="vendor-price">
+                <div class="price">$390 - $600</div>
+              </div>
+            </div>
+            <!-- venue details --> 
+          </div>
+          <div class="col-md-4 vendor-box"><!-- venue box start-->
+            <div class="vendor-image"><!-- venue pic --> 
+              <a href="#"><%= image_tag "vendor-3.jpg", alt:"wedding venue", class:"img-responsive" %></a> 
+              <div class="feature-label"></div><div class="favourite-bg"><a href="#" class=""><i class="fa fa-heart"></i></a></div>
+            </div>
+            <!-- /.venue pic -->
+            <div class="vendor-detail"><!-- venue details -->
+              <div class="caption"><!-- caption -->
+                <h2><a href="#" class="title">Vendor Florist Title</a></h2>
+                <p class="location"><i class="fa fa-map-marker"></i> Street Address, Name of Town, 12345, Country.</p>
+                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <span class="rating-count">(22)</span> </div>
+              </div>
+              <!-- /.caption -->
+              <div class="vendor-price">
+                <div class="price">$390 - $600</div>
+              </div>
+            </div>
+            <!-- venue details --> 
+          </div>
+          <div class="col-md-4 vendor-box"><!-- venue box start-->
+            <div class="vendor-image"><!-- venue pic --> 
+              <a href="#"><%= image_tag "vendor-4.jpg", alt:"wedding venue", class:"img-responsive" %></a> <div class="favourite-bg"><a href="#" class=""><i class="fa fa-heart"></i></a></div></div>
+            <!-- /.venue pic -->
+            <div class="vendor-detail"><!-- venue details -->
+              <div class="caption"><!-- caption -->
+                <h2><a href="#" class="title">Vendor Florist Title</a></h2>
+                <p class="location"><i class="fa fa-map-marker"></i> Street Address, Name of Town, 12345, Country.</p>
+                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <span class="rating-count">(22)</span> </div>
+              </div>
+              <!-- /.caption -->
+              <div class="vendor-price">
+                <div class="price">$390 - $600</div>
+              </div>
+            </div>
+            <!-- venue details --> 
+          </div>
+          <div class="col-md-4 vendor-box"><!-- venue box start-->
+            <div class="vendor-image"><!-- venue pic --> 
+              <a href="#"><%= image_tag "vendor-5.jpg", alt:"wedding venue", class:"img-responsive" %></a> <div class="favourite-bg"><a href="#" class=""><i class="fa fa-heart"></i></a></div></div>
+            <!-- /.venue pic -->
+            <div class="vendor-detail"><!-- venue details -->
+              <div class="caption"><!-- caption -->
+                <h2><a href="#" class="title">Vendor Florist Title</a></h2>
+                <p class="location"><i class="fa fa-map-marker"></i> Street Address, Name of Town, 12345, Country.</p>
+                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <span class="rating-count">(22)</span> </div>
+              </div>
+              <!-- /.caption -->
+              <div class="vendor-price">
+                <div class="price">$390 - $600</div>
+              </div>
+            </div>
+            <!-- venue details --> 
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-12 tp-pagination">
+            <ul class="pagination">
+              <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">Previous</span> </a> </li>
+              <li class="active"><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li> <a href="#" aria-label="Next"> <span aria-hidden="true">NEXT</span> </a> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

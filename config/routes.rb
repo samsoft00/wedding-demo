@@ -43,6 +43,11 @@ Rails.application.routes.draw do
     resources :search, only: [:index] #find vendor
     
     root to: 'pages#vendor_homepage', controller: 'pages'
+
+    scope '/categories' do
+      get '/', to: 'categories#listing_categories', as: 'listing_categories'
+      get ':category', to: 'categories#index'
+    end    
   end
 
   match 'start-planning', to: 'pages#start_planning', via: [:get]
@@ -69,10 +74,10 @@ Rails.application.routes.draw do
 
   root to: 'pages#index'
 
-  scope '/categories' do
-    get '/', to: 'categories#listing_categories', as: 'listing_categories'
-    get ':category', to: 'categories#index'
-  end
+  # scope '/categories' do
+  #   get '/', to: 'categories#listing_categories', as: 'listing_categories'
+  #   get ':category', to: 'categories#index'
+  # end
 
   resources :conversations, only: [:index] do
     collection do

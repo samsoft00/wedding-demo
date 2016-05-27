@@ -19,10 +19,10 @@
         </ol>
       </div>
     </div>
-  </div>
+  </div> 
 </div>
 <div class="main-container">
-  <div class="container">
+  <div class="container"> 
     <div class="row">
       <div class="col-md-4 page-sidebar">
         <div class="row">
@@ -51,7 +51,7 @@
         <div class="vendr-profile-info">
           <h1><%= @profile.business_name %></h1>
           <p class="profile-address"><i class="fa fa-map-marker"></i> <%= @profile.address %></p>
-          <p><span class="profile-email"><i class="fa fa-envelope"></i><%= current_user.email %></span>
+          <p><span class="profile-email"><i class="fa fa-envelope"></i><%= @profile.user.email %></span>
           <span class="profile-website"><i class="fa fa-link"></i><a href="#"><%= @profile.website %></a></span></p>
         </div>
         <div class="venue-details">
@@ -82,22 +82,8 @@
           <h1>Recommend for your Wedding</h1>
         </div>
         <% @user.listing.limit(3).each do |user_listing| %>
-          <div class="col-md-4 vendor-box"><!-- venue box start-->
-            <div class="vendor-image"><!-- venue pic --> 
-              <a href="#"><%= attachment_image_tag(user_listing.pictures.first, :image, :fill, 715, 400, class: "img-responsive") %></a> </div>
-            <!-- /.venue pic -->
-            <div class="vendor-detail"><!-- venue details -->
-              <div class="caption"><!-- caption -->
-                <h2><a href="" class="title"><%= user_listing.name %></a></h2>
-                <p class="location"><i class="fa fa-map-marker"></i> <%= @user.profile.address %> </p>
-                <div class="rating pull-left"><span class="star-rating" data-score= <%= user_listing.rate %> ></span><span class="rating-count">(<%= "#{user_listing.reviews.length}" %>)</span> </div>
-              </div>
-              <!-- /.caption -->
-              <div class="vendor-price">
-                <div class="price">$600</div>
-              </div>
-            </div>
-            <!-- venue details -->  
+          <div class="col-md-4 vendor-box">
+            <%= render 'shared/vendor_box', user_listing: user_listing %>
           </div>
         <% end %>
       </div>

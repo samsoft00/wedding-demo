@@ -13,16 +13,13 @@ class Vendor::ProfilesController < ApplicationController
   # GET /profiles/1.json
   def show
     @user = User.find_by_username(params[:username])
-    if current_user
-      @profile = current_user.profile
+    if !@user.nil?
+      @profile = @user.profile
     else
-      if @user
-        @profile = @user.profile
-      else
-        redirect_to vendor_root_path
-      end
-
+      redirect_to vendor_root_path
     end
+
+    # byebug
   end
 
   # GET /profiles/new

@@ -68,10 +68,18 @@ class ApplicationController < ActionController::Base
 
 		def after_sign_in_path_for(resource)
 		  if resource.is_couple? and !resource.is_vendor?
-		  	wedding_site_setup_index_path
+		  	if !resource.site?
+		  		wedding_site_setup_index_path
+		  	else
+		  		wedding_settings_path
+		  	end
   	 	elsif resource.is_vendor? and !resource.is_couple?
-  	 		session[:profile_id] = nil
-  	 		initialize_profile()
+  	 		if !resource.profile.done?
+  	 			session[:profile_id] = nil
+  	 			initialize_profile()
+  	 		else
+  	 			request.referer || listings_path(resource.username)
+  	 		end
   	 	else
   	 		display_vendor_listing_path
   	 	end
