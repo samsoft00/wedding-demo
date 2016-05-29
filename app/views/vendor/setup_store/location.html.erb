@@ -1,11 +1,8 @@
 <div class="main-container">
   <div class="container">
-  <h2>Side Menu</h2>
   <div class="row">
-    <div class="col-md-3">
-    	<%= tutorial_progress_bar %>
-    </div>
-    <div class="col-md-9 widget">
+
+    <div class="col-md-8 widget">
       <div class="well-box">
 
 		    <div class="row thumb_holder">
@@ -48,7 +45,7 @@
 							  </div>
 							  <hr/>
 							  <div class="form-group">
-							    <%= f.button "Submit", class: "btn btn-success btn-lg", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."} %>
+							    <%= f.button "Continue", class: "btn btn-success btn-lg", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."} %>
 							  </div>
 							<% end %>
 
@@ -58,6 +55,11 @@
       	</div>
     	</div>
   	</div>
+  	
+  	<div class="col-md-4 shop-sidebar">
+  		<%= render partial: 'shared/listing_sidebar' %>
+  	</div>
+
 	</div>
 	</div>
 </div>

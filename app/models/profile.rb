@@ -5,7 +5,7 @@ class Profile < ActiveRecord::Base
   has_many :listing, dependent: :destroy
 
   cattr_accessor :form_steps do
-    %w(business_info social location)
+    %w(business_info social location user)
   end
    
   attr_accessor :form_step
@@ -22,12 +22,31 @@ class Profile < ActiveRecord::Base
   validates :address, :city, :state, :country, presence: true, if: -> { required_for_step?(:location) }
 	# validates :name, :business_name, :about, :website, :category_id, :address, :city, :state, :country, presence: true
 
+  validates_associated :user, if: -> { required_for_step?(:user) }
+
+  # with_options if: -> { required_for_step?(:user) } do |step|
+  #   step.validates :username, :email, :password, presence: true
+  # end
 
   attachment :profile_image, type: :image
 
   def done?
     self.status == 'active'
   end
+
+  def create_user_and_validate
+    if self.status == "location"
+      check_user_errors(user_record)
+      return false unless errors.blank?
+    end
+  end
+
+  def check_user_errors(user)
+    unless user.valid?
+      user.errors.each{|attr,msg| errors.add(attr.to_sym,"#{msg}")}
+    end
+    return false unless user.errors.blank?
+  end  
 
   private
 
@@ -45,6 +64,6 @@ class Profile < ActiveRecord::Base
       # All fields from previous steps are required if the
       # step parameter appears before or we are on the current step
       return true if self.form_steps.index(step.to_s) <= self.form_steps.index(form_step.to_s)
-    end    
+    end
 
 end
