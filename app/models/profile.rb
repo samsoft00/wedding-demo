@@ -41,7 +41,7 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  def check_user_errors(user)
+  def self.check_user_errors(user)
     unless user.valid?
       user.errors.each{|attr,msg| errors.add(attr.to_sym,"#{msg}")}
     end

@@ -17,8 +17,7 @@ class Vendor::SetupStoreController < ApplicationController
 		when "location"
 			@profile = Profile.find(session[:profile_id])
 		when "user"
-			@profile = Profile.find(12)
-			# byebug
+			@profile = Profile.find(session[:profile_id])
 			
 			if @profile.user.present?
 				@user = @profile.user
@@ -50,27 +49,11 @@ class Vendor::SetupStoreController < ApplicationController
 			# current_user.update_attributes(is_vendor: true)
 			# session[:profile_id] = session["profile"] = nil 
 			render_wizard @profile
-
+ 
  		when "user"
-	 		@profile = Profile.find(session[:profile_id])
-	 		if !@profile.user.present?
 
-	 			if @profile.status == "active"#previous step
-		      user_record = @profile.build_user
-		      user_record.username = params[:user][:username]
-		      user_record.is_vendor = true
-		      user_record.email = params[:user][:email].blank? ? "" : params[:user][:email]
-		      user_record.password = params[:user][:password]
-		    end
+ 		end
 
-			end
-
-	    # byebug
-	    @profile.update(profile_params(step))
-			session[:profile_id] = session["profile"] = nil
-			render_wizard @profile			
-
-		end
 
 	end
 
@@ -84,13 +67,13 @@ class Vendor::SetupStoreController < ApplicationController
 				[:facebook, :twitter, :instagram, :website]
 			when "location"
 				[:address, :city, :state, :country]
-			when "user"
-				[:username, :email, :password]
 			end
 
-			byebug
+			params.require(:profile).permit(permitted_attributes).merge(form_step: step)
+		end
 
-			params.require(:user).permit(permitted_attributes).merge(form_step: step)
+		def user_params
+			params.require(:user).permit([:username, :email, :password])#.merge(form_step: step)
 		end
 
 		def set_profile
