@@ -46,8 +46,8 @@
           <% if user_signed_in? %>
             
             <% if current_user.is_couple? and !current_user.is_vendor? %>
-              <!--  new_vendor_profile_path(existing: true) -->
-              <li><%= link_to "Become a Vendor", vendor_profiles_path, method: :post %></li>
+              <!--  new_vendor_profile_path(existing: true) vendor_profiles_path -->
+              <li><%= link_to "Become a Vendor", vendor_profiles_path %></li>
             <% end %>
 
             <% if !current_user.is_couple? and current_user.is_vendor? %>
@@ -63,8 +63,8 @@
           <% else %>
               <!-- Registration Page for Couple -->
             <li><%= link_to "I'm couple",  wedding_sign_up_path %></li>
-            <!-- Registration Page for Vendor -->
-            <li><%= link_to "Are you vendor?",  vendor_sign_up_path %></li>
+            <!-- Registration Page for Vendor vendor_sign_up_path -->
+            <li><%= link_to "Are you vendor?",  vendor_setup_store_index_path %></li>
             <li><%= link_to "Log in",  new_user_session_path %></li>
           <% end %>
           <li> <%= link_to "Faqs", faqs_path %></li>

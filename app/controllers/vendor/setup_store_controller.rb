@@ -10,7 +10,7 @@ class Vendor::SetupStoreController < ApplicationController
 	def show
 		case step
 		when "business_info"
-			# @profile.build_user
+			
 		when "social"
 			# @profile = Profile.find(session[:profile_id])
 		when "location"
@@ -32,9 +32,8 @@ class Vendor::SetupStoreController < ApplicationController
 			render_wizard @profile
 
 		when "location"
-			@profile.update(profile_params(step).merge(status: step.to_s))
-			# current_user.update_attributes(is_vendor: true)
-			# session[:profile_id] = session["profile"] = nil 
+			@profile.assign_attributes(profile_params(step).merge(status: 'active'))
+			session[:profile_id] = session["profile"] = nil
 			render_wizard @profile
 
  		end
@@ -58,12 +57,9 @@ class Vendor::SetupStoreController < ApplicationController
 		end
 
 		def initialize_profile
+			# @profile = Profile.find(session[:profile_id]) || Profile.new
 			if session[:profile_id].nil?
 	    	@profile = Profile.new
-	    	# @profile.user_id = current_user.id
-	    	@profile.status = :start
-	    	@profile.save(validate: false)
-	    	session[:profile_id] = @profile.id
 	    else
 	    	@profile = Profile.find(session[:profile_id])
 	    end
@@ -73,8 +69,32 @@ class Vendor::SetupStoreController < ApplicationController
 			if current_user
 				listings_path(current_user.username)
 			else
-
+				flash[:info] = "Registration successful, kindly check your mail for confirmation email. Thanks"
+				new_user_session_path
 			end
 		end
+
+		#Copy: https://github.com/schneems/wicked/blob/master/lib/wicked/controller/concerns/render_redirect.rb
+		def render_wizard(resource = nil, options = {})
+	    process_resource!(resource)
+
+	    if @skip_to
+	      redirect_to wizard_path(@skip_to, @wicked_redirect_params || {}), options
+	    else
+	      render_step wizard_value(step), options
+	    end
+
+		end
+
+	  def process_resource!(resource)
+	    if resource
+	      if resource.save
+	      	session[:profile_id] = resource.id if session[:profile_id].nil?
+	        @skip_to ||= @next_step
+	      else
+	        @skip_to = nil
+	      end
+	    end
+	  end		
 
 end
