@@ -5,48 +5,65 @@ class Profile < ActiveRecord::Base
   has_many :listing, dependent: :destroy
 
   cattr_accessor :form_steps do
-    %w(business_info social location user)
+    %w(business_info social location)
   end
    
-  attr_accessor :form_step
+  attr_accessor :form_step, :email, :username
 
   # has_attached_file :avatar, styles: { medium: "358x320#", thumb: "150x150#" }, default_url: "default.png"
   # validates :name, :business_name, :about, :phone, :services, :category_id, presence: true, if: -> { required_for_step?(:business_info)
-  with_options if: -> { required_for_step?(:business_info) } do |step|
-    step.validates :name, :business_name, :about, :services, :category_id, presence: true
+  
+  with_options :if => lambda { |o| o.form_step == "business_info" } do |step|
+    step.validates :business_name, :about, :services, :category_id, presence: true
     step.validates :phone, presence: true, 
-                    numericality: { only_integer: true }, 
+                    numericality: { only_integer: true },
                     length: {minimum: 11}
+
+    step.validates_associated :user
+    step.before_validation :create_user_and_validate
   end    
   # validates :facebook, :twitter, :instagram, :website, presence: true, if: -> { required_for_step?(:social) }
-  validates :address, :city, :state, :country, presence: true, if: -> { required_for_step?(:location) }
+  validates :address, :city, :state, :country, presence: true, :if => lambda { |o| o.form_step == "location" }
 	# validates :name, :business_name, :about, :website, :category_id, :address, :city, :state, :country, presence: true
 
-  validates_associated :user, if: -> { required_for_step?(:user) }
-
-  # with_options if: -> { required_for_step?(:user) } do |step|
-  #   step.validates :username, :email, :password, presence: true
-  # end
 
   attachment :profile_image, type: :image
+
 
   def done?
     self.status == 'active'
   end
 
   def create_user_and_validate
-    if self.status == "location"
+    # byebug
+    if self.status == 'business_info'#self.new_record?
+      user_record = self.build_user
+      user_record.username = self.username
+      user_record.is_vendor = true
+      user_record.email = self.email.blank? ? "" : self.email.to_s
       check_user_errors(user_record)
       return false unless errors.blank?
+    # else
+    #   self.user.is_vendor = true
+    #   changes_to_be_checked = ['username','email']
+    #   check_changes = self.changed & changes_to_be_checked
+    #   unless check_changes.blank?
+    #     self.user.username = self.username if check_changes.include?('username')
+    #     self.user.email = self.email if check_changes.include?('email')
+    #     check_user_errors(self.user)
+    #   end
+      
     end
+    self.email = "" if self.email.blank?
+    return false unless errors.blank?
   end
 
-  def self.check_user_errors(user)
+  def check_user_errors(user)
     unless user.valid?
       user.errors.each{|attr,msg| errors.add(attr.to_sym,"#{msg}")}
     end
     return false unless user.errors.blank?
-  end  
+  end
 
   private
 

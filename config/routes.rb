@@ -7,8 +7,16 @@
 
 Rails.application.routes.draw do
 	
-	devise_for :users, :controllers => { registrations: "registrations"}
+  as :user do
+    patch '/user/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
+  end  
 
+	devise_for :users, 
+    :controllers => { 
+      registrations: "registrations",
+      confirmations: "confirmations" 
+    }
+    
   #Handle single pages
   match 'faqs', to: 'pages#faqs', via: [:get]
   match 'contact_us', to: 'pages#contact-us', via: [:get]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504120532) do
+ActiveRecord::Schema.define(version: 20160530160104) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -157,7 +157,6 @@ ActiveRecord::Schema.define(version: 20160504120532) do
   add_index "pictures", ["imageable_id"], name: "index_pictures_on_imageable_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "name",             limit: 255
     t.string   "business_name",    limit: 255
     t.string   "phone",            limit: 255
     t.string   "website",          limit: 255

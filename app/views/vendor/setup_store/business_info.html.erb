@@ -3,6 +3,10 @@
     margin: auto; 
     padding-top: 10px;		
 	}
+	div.well{
+		border-radius: 0px;
+		margin-top: 30px;
+	}
 </style>
 <div class="main-container">
   <div class="container">
@@ -19,13 +23,7 @@
 
 							<%= form_for(@profile, url: wizard_path, method: :put, class: "form-horizontal") do |f| %>		
 
-							  <% if f.object.errors.any? %>
-							    <div class="error_messages"> 
-							      <% f.object.errors.full_messages.each do |error| %>
-							        <p><%= error %></p>
-							      <% end %>
-							    </div>
-							  <% end %>
+							  <%= render 'shared/form_error_message', f:f %>
 									
 			          <div class="form-group">
 			            <div class="profile-userpic"> <%= image_tag "profile_user.jpg", class:"img-responsive img-circle", alt:"" %> 
@@ -34,12 +32,8 @@
 			          </div>							  
 							  
 							  <div class="form-group">
-							    <%= f.label :name, class: "control-label" %><br>
-							    <%= f.text_field :name, class: "form-control", placeholder: "Enter Name", autofocus: true, autocomplete: "off" %>
-							  </div>
-							  <div class="form-group">
 							    <%= f.label :business_name, "Company Name", class: "control-label" %><br>
-							    <%= f.text_field :business_name,class: "form-control", placeholder: "Enter Business Name", autocomplete: "off" %>
+							    <%= f.text_field :business_name,class: "form-control", placeholder: "Enter Business Name", autocomplete: "off", autofocus: true %>
 							  </div>
 							  <div class="form-group">
 							    <%= f.label :about, "About Company", class: "control-label" %><br>
@@ -51,12 +45,22 @@
 							  </div> 							  
 							  <div class="form-group">
 							    <%= f.label :phone, class: "control-label" %>
-							    <%= f.text_field :phone,class: "form-control", placeholder: "Enter Phone Number", autofocus: true, autocomplete: "off" %>
+							    <%= f.text_field :phone,class: "form-control", placeholder: "Enter Phone Number", autocomplete: "off" %>
 							  </div>
 							  <div class="form-group">
 							    <%= f.label :category_id, "Type of Business", class: "control-label" %>
 							    <%= f.collection_select :category_id, Category.all, :id, :name, options = {prompt: "Select Category"}, html_options = {class: "form-control selectpicker"} %>
 							  </div> 
+							  <div class="well">
+									  <div class="form-group">
+									    <%= f.label :username, class: "control-label" %>
+									    <%= f.text_field :username,class: "form-control", placeholder: "Username", autocomplete: "off" %>
+									  </div>
+									  <div class="form-group">
+									    <%= f.label :email, "Type of Business", class: "control-label" %>
+									    <%= f.text_field :email,class: "form-control", placeholder: "Email Address", autocomplete: "off" %>
+									  </div>
+							  </div>
 							  <hr/>
 							  <div class="form-group">
 							    <%= f.button "Continue", class: "btn btn-success btn-lg", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Progress, Please wait..."} %>

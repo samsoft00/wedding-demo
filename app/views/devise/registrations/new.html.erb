@@ -62,17 +62,8 @@
                 <%= f.email_field :email, class: "form-control", placeholder: "Email Address", required: true, autocomplete: "off" %>
               </div>
 
-              <div class="form-group">
-                <%= f.label :password, class: "control-label" %>
-                <% if @minimum_password_length %>
-                <em>(<%= @minimum_password_length %> characters minimum)</em>
-                <% end %><br />
-                <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-              </div>
 
               <div class="form-group">
-                <%= f.label :password_confirmation, class: "control-label" %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
                 <%= hidden_field resource_name, :user_type, value: params[:user][:user_type] %>
               </div>
               <div class="form-group">
