@@ -9,6 +9,7 @@ class Profile < ActiveRecord::Base
   end
    
   attr_accessor :form_step, :email, :username
+  attr_accessor :c_user
 
   # has_attached_file :avatar, styles: { medium: "358x320#", thumb: "150x150#" }, default_url: "default.png"
   # validates :name, :business_name, :about, :phone, :services, :category_id, presence: true, if: -> { required_for_step?(:business_info)
@@ -19,8 +20,8 @@ class Profile < ActiveRecord::Base
                     numericality: { only_integer: true },
                     length: {minimum: 11}
 
-    step.validates_associated :user
-    step.before_validation :create_user_and_validate
+    step.validates_associated :user, if: -> { c_user.nil? }
+    step.before_validation :create_user_and_validate, if: -> { c_user.nil? }
   end    
   # validates :facebook, :twitter, :instagram, :website, presence: true, if: -> { required_for_step?(:social) }
   validates :address, :city, :state, :country, presence: true, :if => lambda { |o| o.form_step == "location" }
@@ -28,7 +29,6 @@ class Profile < ActiveRecord::Base
 
 
   attachment :profile_image, type: :image
-
 
   def done?
     self.status == 'active'

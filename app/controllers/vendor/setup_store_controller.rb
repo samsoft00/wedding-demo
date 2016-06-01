@@ -10,7 +10,7 @@ class Vendor::SetupStoreController < ApplicationController
 	def show
 		case step
 		when "business_info"
-			
+			byebug
 		when "social"
 			# @profile = Profile.find(session[:profile_id])
 		when "location"
@@ -24,7 +24,7 @@ class Vendor::SetupStoreController < ApplicationController
 	def update
 		case step
 		when "business_info"
-			@profile.assign_attributes(profile_params(step).merge(status: step.to_s))
+			@profile.assign_attributes(profile_params(step).merge({status: step.to_s, c_user: current_user}))
 			render_wizard @profile
 
 		when "social"
@@ -59,7 +59,7 @@ class Vendor::SetupStoreController < ApplicationController
 		def initialize_profile
 			# @profile = Profile.find(session[:profile_id]) || Profile.new
 			if session[:profile_id].nil?
-	    	@profile = Profile.new
+	    	@profile = Profile.new || current_user.profile
 	    else
 	    	@profile = Profile.find(session[:profile_id])
 	    end
@@ -67,6 +67,7 @@ class Vendor::SetupStoreController < ApplicationController
 
 		def finish_wizard_path
 			if current_user
+				flash[:success] = "Profile Update Successfully!"
 				listings_path(current_user.username)
 			else
 				flash[:info] = "Registration successful, kindly check your mail for confirmation email. Thanks"

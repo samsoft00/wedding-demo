@@ -24,17 +24,18 @@ class ApplicationController < ActionController::Base
 	# 	render file: 'public/500.html', status: :internal_server_error, layout: false
 	# end
 
-	def after_sign_in_path_for(resource)
-		# byebug
-		if params[:redirect_to].present?
-			store_location_for(resource, params[:redirect_to])
-		elsif request.referer == new_session_url(resource)
-			super
-		else
-			stored_location_for(resource) || request.referer || root_path
-		end
+	# def after_sign_in_path_for(resource)
+	# 	# byebug
+	# 	if params[:redirect_to].present?
+	# 		store_location_for(resource, params[:redirect_to])
+	# 	elsif request.referer == new_session_url(resource)
+	# 		super
+	# 	else
+	# 		stored_location_for(resource) || request.referer || root_path
+	# 	end
 				
-	end
+	# end
+
 
 	def getVendorAddress(profile)
 		profile.address+' '+profile.city+ ', '+profile.state
@@ -76,9 +77,9 @@ class ApplicationController < ActionController::Base
   	 	elsif resource.is_vendor? and !resource.is_couple?
   	 		if !resource.profile.done?
   	 			session[:profile_id] = nil
-  	 			initialize_profile()
+  	 			initialize_profile(resource)
   	 		else
-  	 			request.referer || listings_path(resource.username)
+  	 			listings_path(resource.username)
   	 		end
   	 	else
   	 		display_vendor_listing_path
@@ -86,13 +87,13 @@ class ApplicationController < ActionController::Base
 
 		end	
 
-		def initialize_profile
-	    @profile = current_user.profile || Profile.new
-	    @profile.user_id = current_user.id
-	    @profile.status = :start
-	    @profile.save(validate: false)
-	    session[:profile_id] = @profile.id
-	    vendor_setup_store_index_path
+		def initialize_profile(resource)
+	    # @profile = current_user.profile || Profile.new
+	    if resource.profile.status.present?
+	    	vendor_setup_store_path(resource.profile.status)
+	    else
+	    	vendor_setup_store_index_path
+	    end
 		end	
 
 end
