@@ -24,18 +24,6 @@ class ApplicationController < ActionController::Base
 	# 	render file: 'public/500.html', status: :internal_server_error, layout: false
 	# end
 
-	# def after_sign_in_path_for(resource)
-	# 	# byebug
-	# 	if params[:redirect_to].present?
-	# 		store_location_for(resource, params[:redirect_to])
-	# 	elsif request.referer == new_session_url(resource)
-	# 		super
-	# 	else
-	# 		stored_location_for(resource) || request.referer || root_path
-	# 	end
-				
-	# end
-
 
 	def getVendorAddress(profile)
 		profile.address+' '+profile.city+ ', '+profile.state

@@ -25,6 +25,8 @@ gem "select2-rails"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'bootstrap-filestyle-rails'
+gem 'searchkick'
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'gravatar_image_tag'
 gem 'chosen-rails'

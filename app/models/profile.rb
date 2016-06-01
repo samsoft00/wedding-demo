@@ -5,7 +5,7 @@ class Profile < ActiveRecord::Base
   has_many :listing, dependent: :destroy
 
   cattr_accessor :form_steps do
-    %w(business_info social location)
+    %w(business_info location social)
   end
    
   attr_accessor :form_step, :email, :username
