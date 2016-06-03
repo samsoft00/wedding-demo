@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-	skip_before_action :authenticate_user!, only: [:index, :faqs, :'contact-us']
+	skip_before_action :authenticate_user!#, only: [:index, :faqs, :'contact-us']
 
 	def index
 	end

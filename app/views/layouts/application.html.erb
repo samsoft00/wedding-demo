@@ -62,7 +62,7 @@
             <li><%= link_to "Log out",  destroy_user_session_path, method: :delete %></li>
           <% else %>
               <!-- Registration Page for Couple -->
-            <li><%= link_to "I'm couple",  wedding_sign_up_path %></li>
+            <li><%= link_to "I'm couple",  wedding_site_setup_index_path %></li>
             <!-- Registration Page for Vendor vendor_sign_up_path -->
             <li><%= link_to "Are you vendor?",  vendor_setup_store_index_path %></li>
             <li><%= link_to "Log in",  new_user_session_path %></li>
@@ -264,6 +264,72 @@
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+  $(function () {
+    $('.event-date').each(function(){
+        $(this).datetimepicker({ format: 'DD-MM-YYYY'});
+    });      
+    
+    $('.from').each(function(){
+      $(this).datetimepicker({ format: 'LT' });
+    });
+    
+    $('.to').each(function(){
+      $(this).datetimepicker({ format: 'LT' });
+    });
+
+    $('#wedding_date').datetimepicker({ format: 'DD-MM-YYYY' });
+
+    $('#site_wedding_date').datetimepicker({ format: 'DD-MM-YYYY' });
+
+    $('body').on('focus',".datepicker_recurring_start", function(){
+        $(this).datepicker();
+    });
+
+  });
+
+  $(":file").filestyle({ buttonAfter: true });
+  $('.chosen-it').chosen({max_selected_options: 1});
+
+
+  $('.summernote_min').summernote({ 
+    height: 200,
+    tabsize: 2,
+    toolbar: [
+      // [groupName, [list of button]]
+      // ['style', ['bold', 'italic', 'underline', 'clear']],
+      // ['font', ['strikethrough', 'superscript', 'subscript']],
+      ['fontsize', ['fontsize']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['height', ['height']]
+    ],
+    codemirror: { // codemirror options
+      theme: 'cerulean'
+    },
+    disableDragAndDrop: false 
+  });
+
+  $('.summernote').summernote({ 
+    height: 200,
+    tabsize: 2,
+    toolbar: [
+      // [groupName, [list of button]]
+      ['style', ['bold', 'italic', 'underline', 'clear']],
+      ['font', ['strikethrough', 'superscript', 'subscript']],
+      ['fontsize', ['fontsize']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['height', ['height']]
+    ],
+    codemirror: { // codemirror options
+      theme: 'cerulean'
+    },
+    disableDragAndDrop: false 
+  });
+
+
 </script>
 
 </body>

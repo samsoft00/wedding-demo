@@ -1,0 +1,127 @@
+<div class="tp-page-head"><!-- page header -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header" style="text-align:center">
+          <h1>Start Your Wedding Plan, Choose a template</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- /.page header -->
+<div class="tp-breadcrumb"><!-- breadcrumb -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">Choose a template</li>
+        </ol>
+      </div>
+      <div class="col-md-4 text-right">
+      <a class="btn tp-btn-link" role="button" data-toggle="collapse" href="#searchform" aria-expanded="false" aria-controls="searchform">Filter</a> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="container">
+
+    <div class="row thumb_holder">
+      <div class="col-md-12">
+        <div class="row">
+        	<!-- top -->
+          <div class="col-md-12">
+            <h2 class="gd-title">Choose Your Wedding Template</h2>
+            <p>To start, select best template for your wedding website</p>            
+          </div>
+
+            <%= form_for @layout, url: wizard_path, method: :put do |f|%>
+
+	            <% @templates.each do |template | %>
+								<div class="col-md-4 text-center template-box">
+									<div class="panel panel-default">
+									  <div class="panel-body">
+											<div class="thumb">
+												<!-- <a href="http://codelayers.net/templates/hasta/corporate/fullwidth/index.html" target="_blank"> -->
+													<div class="overley"></div>
+												</a>
+												<%= image_tag "http://codelayers.net/templates/hasta/demo/images/thumb1.jpg", alt:"", class:"img-responsive" %>
+											</div>
+									  </div>
+									  <div class="panel-footer">
+											<div class="but">
+												<%=  f.radio_button :name, template.name, :checked => false, :class => "icheck-me", 'data-skin'=>"square", 'data-color'=>"blue" %>
+												<%= f.label :name, :value => template.name %>
+												<!-- <a href="#" target="_blank"></a> -->
+											</div>	
+											<%= f.hidden_field(:id, :value => template.id) %>						  	
+									  </div>
+									</div>							
+								</div>
+							<% end %>
+
+							<div class="col-md-12">
+								<hr/>
+								<div class="form-group">
+									<%= f.submit "Continue", class: "btn btn-success" %>
+								</div>
+							</div>
+
+            <% end %>              
+
+        </div>        
+      </div>
+
+	    <div class="row">
+	      <div class="col-md-12 tp-pagination">
+	        <ul class="pagination">
+	          <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">Previous</span> </a> </li>
+	          <li class="active"><a href="#">1</a></li>
+	          <li><a href="#">2</a></li>
+	          <li><a href="#">3</a></li>
+	          <li><a href="#">4</a></li>
+	          <li><a href="#">5</a></li>
+	          <li> <a href="#" aria-label="Next"> <span aria-hidden="true">NEXT</span> </a> </li>
+	        </ul>
+	      </div>
+	    </div>      
+
+    </div>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+	$('#color-panel').minicolors({
+		theme: 'bootstrap', 
+		// defaultValue: '#b3b3b2',
+		letterCase: 'uppercase',
+		position: 'bottom left'
+	});
+
+	function icheck(){
+	  if($(".icheck-me").length > 0){
+	    $(".icheck-me").each(function(index){
+	    	var $el = $(this);
+
+	    	if (index == 0){ $el.attr('checked', true) }; //checked the first by default
+	      
+	      var skin = ($el.attr('data-skin') !== undefined) ? "_" + $el.attr('data-skin') : "",
+	      color = ($el.attr('data-color') !== undefined) ? "-" + $el.attr('data-color') : "";
+	      var opt = {
+	        checkboxClass: 'icheckbox' + skin + color,
+	        radioClass: 'iradio' + skin + color,
+	      }
+	      $el.iCheck(opt);
+	    });
+	  }
+	}
+
+	$(function(){ icheck() });
+</script>
+
+

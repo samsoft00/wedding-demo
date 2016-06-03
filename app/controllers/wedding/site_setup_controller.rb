@@ -1,5 +1,4 @@
 class Wedding::SiteSetupController < ApplicationController
-	
 	# before_action :check_step#, :if => :user_site?
 	before_action :set_site, only: [:update, :show]
 	before_action :check_if_site_active
@@ -7,7 +6,7 @@ class Wedding::SiteSetupController < ApplicationController
 	#Using Wicked Form
 	include Wicked::Wizard
 
-	steps :select_template, :couple_info, :our_story, :slider, :gallery
+	steps :'couple-info', :'our-story', :slider, :gallery
 	respond_to :html
 
 	def user_site?
@@ -17,22 +16,11 @@ class Wedding::SiteSetupController < ApplicationController
 	def show
 
 		case step
-			when :select_template
-				@templates = Template.all()
-				@layout = SiteLayout.new
-
-				if session[:layout].present?
-					# @layout = SiteLayout.new(session[:layout])
-					# redirect_to next_wizard_path
-				else
-					session[:layout] = nil;
-				end
-
-			when :couple_info
+			when :'couple-info'
 				# @site = current_user.site || Site.new
-				2.times {@site.wedding_location.build} unless !@site.new_record?
+				2.times {@site.wedding_location.build}# unless !@site.new_record?
 
-			when :our_story
+			when :'our-story'
 				@our_story = @site.our_story || OurStory.new
 
 			when :slider
@@ -50,40 +38,21 @@ class Wedding::SiteSetupController < ApplicationController
 
 	def update
 		case step
-		when :select_template
-			@layout = SiteLayout.new(layout_params)
-			
-			if !@layout.valid? #validation
-				redirect_to :back
-			end
-
-			session[:layout] = @layout.attributes
-			redirect_to next_wizard_path and return
-
-		when :couple_info
+		when :'couple-info'
 			if !@site.new_record?
-			# if params[:site][:id].present?#which means user want to update
-				# @site = Site.find(params[:site][:id])
-				@site.update_attributes(site_params)
-				redirect_to next_wizard_path
-
-			else
-
-				@site = Site.new(site_params)
-				@site.status = step.to_s
-				@site.user_id = current_user.id
+				@site.assign_attributes(site_params.merge({status: step.to_s, form_step: "all", c_user: current_user}))
 
 				render_wizard @site
 			end
 
-		when :our_story
+		when :'our-story'
 			if !@site.our_story.nil?
 				@site.our_story.update_attributes(our_story_params)
 				redirect_to next_wizard_path
 			else
 				@story = OurStory.new(our_story_params)
 				@story.site_id = current_user.site.id
-				@story.site.update_attributes(status: step.to_s)
+				@story.site.update_attributes({status: step.to_s, c_user: current_user})
 				render_wizard @story
 			end
 			
@@ -110,6 +79,7 @@ class Wedding::SiteSetupController < ApplicationController
 				@gallery = Gallary.new(gallery_params)
 				@gallery.site = current_user.site
 				@gallery.site.update_attributes(status: 'active')#step.to_s
+				flash[:notice] = "Congratulation, you've succuessful setup your pre-wedding website."
 						# byebug
 				render_wizard @gallery
 			end
@@ -125,15 +95,11 @@ class Wedding::SiteSetupController < ApplicationController
 		end
 
 		def set_site
-			@site = current_user.site || Site.new
+			@site = current_user.site
 		end
 
 		def finish_wizard_path
 		  wedding_settings_path(current_user.username)
-		end		
-
-		def layout_params
-			params.require(:site_layout).permit(:name, :color)
 		end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -175,7 +141,7 @@ class Wedding::SiteSetupController < ApplicationController
     end
 
     def check_if_site_active
-    	redirect_to  wedding_settings_path(current_user.username) if current_user.site.present? and current_user.site.status.to_sym == :active
+    	# redirect_to  wedding_settings_path(current_user.username) if current_user.site.present? and current_user.site.status.to_sym == :active
     end
 
 end

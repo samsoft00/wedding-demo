@@ -1,0 +1,98 @@
+<div class="tp-page-head"><!-- page header -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1>Create Account</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.page header -->
+<div class="tp-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">Create Account</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-container">
+  <div class="container">
+  	
+  	<div class="row">
+  		<div class="col-md-8 col-md-offset-2  well-box">
+  			<div class="row">
+  				<div class="col-md-12"><%= render 'shared/flash_message' %></div>
+  			</div>
+
+		  	<%= form_for @site, url: wizard_path, method: :put do |f| %>
+	  			
+	  			<div class="row">
+	  				<div class="col-md-12"><%= render 'shared/form_error_message', f: f %></div>
+	  			</div>
+
+	  			<div class="row">
+
+			  		<div class="col-md-6">
+
+							  <div class="form-group">
+							    <%= f.text_field :username, autofocus: true, class:"form-control", placeholder: "Username" %>
+							  </div>
+							  <div class="form-group">
+							    <%= f.text_field :email, class:"form-control", placeholder: "Email Address" %>
+							  </div>
+							  <div class="form-group">
+							    <%= f.text_field :bride_name, class:"form-control", placeholder: "Bride Name" %>
+							  </div>
+							  <div class="form-group">
+							  	
+							    <%= f.text_field :groom_name, class:"form-control", placeholder: "Groom Name" %>
+							  </div>
+							  <div class="form-group">
+								  <div class='input-group date event-date'>
+								  	<%= f.text_field :wedding_date, class: "form-control", placeholder: "Wedding Date" %>
+						          <span class="input-group-addon">
+						              <span class="glyphicon glyphicon-calendar"></span>
+						          </span>
+								  </div>
+
+							  </div>
+							  <div class="form-group">
+								  <%= f.submit "Create Account" %>
+								  <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+							  </div> 			
+
+			  		</div>
+
+						<div class="col-md-6 text-center template-box">
+							<div class="panel panel-default">
+							  <div class="panel-body">
+									<div class="thumb">
+										<!-- <a href="http://codelayers.net/templates/hasta/corporate/fullwidth/index.html" target="_blank"> -->
+											<div class="overley"></div>
+										</a>
+										<%= image_tag "http://codelayers.net/templates/hasta/demo/images/thumb1.jpg", alt:"", class:"img-responsive" %>
+									</div>
+							  </div>
+							  <div class="panel-footer">
+									<div class="but">
+										<label><%= @template.name.upcase %></label>
+									</div>	
+									
+							  </div>
+							</div>							
+						</div>
+
+	  			</div>
+		  	<% end %>
+  		</div>
+  	</div>
+
+  </div>
+</div>

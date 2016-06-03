@@ -57,8 +57,19 @@ class ApplicationController < ActionController::Base
 
 		def after_sign_in_path_for(resource)
 		  if resource.is_couple? and !resource.is_vendor?
-		  	if !resource.site?
-		  		wedding_site_setup_index_path
+
+		  	if !resource.site.done?
+
+		  		if resource.site.status.nil?
+		  			wedding_site_setup_path("couple-info")
+		  		else
+		  			steps = %w(couple-info our-story slider gallery)
+		  			if steps.include?(resource.site.status)
+		  				index = steps.index(resource.site.status.to_s)
+		  				wedding_site_setup_path(steps[index+1].to_s)
+		  			end
+		  		end
+		  		
 		  	else
 		  		wedding_settings_path
 		  	end
@@ -76,9 +87,10 @@ class ApplicationController < ActionController::Base
 		end	
 
 		def initialize_profile(resource)
-	    # @profile = current_user.profile || Profile.new
-	    if resource.profile.status.present?
-	    	vendor_setup_store_path(resource.profile.status)
+	    posibilities = %w(business_info social location)
+	    if posibilities.include?(resource.profile.status)
+	    	index = posibilities.index(resource.profile.status.to_s)
+	    	vendor_setup_store_path(posibilities[index+1].to_s)
 	    else
 	    	vendor_setup_store_index_path
 	    end

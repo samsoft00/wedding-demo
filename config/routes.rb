@@ -58,8 +58,14 @@ Rails.application.routes.draw do
     end    
   end
 
-  match 'start-planning', to: 'pages#start_planning', via: [:get]
-  match 'choose-plan', to: 'pages#choose-plan', via: [:get]
+  #To start a wedding planing... select a template.
+  # template => plan => register
+  namespace :start do
+    resources :wedding_plan, :path => '/'
+  end
+
+  # match 'start-planning', to: 'pages#start_planning', via: [:get]
+  # match 'choose-plan', to: 'pages#choose-plan', via: [:get]
 
   namespace :wedding do
 

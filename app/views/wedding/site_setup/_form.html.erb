@@ -21,7 +21,7 @@
           </div>
           <div class="form-group col-sm-12">
             <%= f.label :about_groom, class: "control-label" %>
-            <%= f.text_area :about_groom, class: "form-control", size: "x5" %>
+            <%= f.text_area :about_groom, class: "form-control summernote", size: "x5" %>
           </div>
           <div class="form-group col-sm-12">
             <!-- Bride Image Upload -->
@@ -43,7 +43,7 @@
           </div>
           <div class="form-group col-sm-12">
             <%= f.label :about_bride, class: "control-label" %>
-            <%= f.text_area :about_bride, class: "form-control", size: "x5" %>
+            <%= f.text_area :about_bride, class: "form-control summernote", size: "x5" %>
           </div>
           <div class="form-group col-sm-12">
             <!-- Bride Image Upload -->
@@ -99,30 +99,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-
-
-<script type="text/javascript">
-  $(function () {
-    $('.event-date').each(function(){
-        $(this).datetimepicker({ format: 'DD-MM-YYYY'});
-    });      
-    
-    $('.from').each(function(){
-      $(this).datetimepicker({ format: 'LT' });
-    });
-    
-    $('.to').each(function(){
-      $(this).datetimepicker({ format: 'LT' });
-    });
-
-    $('#wedding_date').datetimepicker({ format: 'DD-MM-YYYY' });
-
-    $('body').on('focus',".datepicker_recurring_start", function(){
-        $(this).datepicker();
-    });
-
-  });
-
-  $(":file").filestyle({ buttonAfter: true });
-  $('.chosen-it').chosen({max_selected_options: 1});
-</script>
