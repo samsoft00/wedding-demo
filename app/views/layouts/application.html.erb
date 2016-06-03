@@ -46,12 +46,11 @@
           <% if user_signed_in? %>
             
             <% if current_user.is_couple? and !current_user.is_vendor? %>
-              <!--  new_vendor_profile_path(existing: true) vendor_profiles_path -->
-              <li><%= link_to "Become a Vendor", vendor_profiles_path %></li>
+              <li><%= link_to "Become a Vendor",  vendor_setup_store_index_path %></li>
             <% end %>
 
             <% if !current_user.is_couple? and current_user.is_vendor? %>
-              <li><%= link_to "I'm Couple",  wedding_site_setup_index_path %></li>
+              <li><%= link_to "I'm Couple",   start_wedding_plan_index_path %></li>
             <% end %>
 
             <% if current_user.is_couple? and current_user.is_vendor? %>
@@ -62,9 +61,9 @@
             <li><%= link_to "Log out",  destroy_user_session_path, method: :delete %></li>
           <% else %>
               <!-- Registration Page for Couple -->
-            <li><%= link_to "I'm couple",  wedding_site_setup_index_path %></li>
+            <li><%= link_to "I'm couple",   start_wedding_plan_index_path %></li>
             <!-- Registration Page for Vendor vendor_sign_up_path -->
-            <li><%= link_to "Are you vendor?",  vendor_setup_store_index_path %></li>
+            <li><%= link_to "Are you vendor?", vendor_setup_store_index_path %></li>
             <li><%= link_to "Log in",  new_user_session_path %></li>
           <% end %>
           <li> <%= link_to "Faqs", faqs_path %></li>
@@ -119,10 +118,10 @@
           
           <!-- /.Mega Dropdown -->
           <li> <%= link_to "Find Vendor", vendor_search_index_path %></li>
-          <li> <%= link_to "Add Listings", wedding_site_setup_index_path %></li>
+          
           <% if user_signed_in? %>
+            <li> <%= link_to "Add Listings",  new_listing_path(current_user.username) %></li>
             <li role="presentation">
-
               <div class="profile-userpic nav-userpic">
                 <%= image_tag attachment_url(current_user.profile, :profile_image, :fill, 50, 50, fallback: "profile_user.jpg") %>
               </div>

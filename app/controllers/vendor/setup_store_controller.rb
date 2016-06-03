@@ -10,7 +10,7 @@ class Vendor::SetupStoreController < ApplicationController
 	def show
 		case step
 		when "business_info"
-			byebug
+
 		when "social"
 			# @profile = Profile.find(session[:profile_id])
 		when "location"

@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   match 'contact_us', to: 'pages#contact-us', via: [:get]
 
   devise_scope :user do
-    match 'vendor/sign_up', to: 'registrations#new', user: {user_type: 'vendor'}, via: [:get]
-    match 'wedding/sign_up', to: 'wedding/registrations#new', user: {user_type: 'wedding'}, via: [:get]
+    # match 'vendor/sign_up', to: 'registrations#new', user: {user_type: 'vendor'}, via: [:get]
+    # match 'wedding/sign_up', to: 'wedding/registrations#new', user: {user_type: 'wedding'}, via: [:get]
     match ':user_type/registration_successful', to: 'pages#registration_confirmation_page', as: 'registration_confirmation_page', via: [:get]
   end
 
