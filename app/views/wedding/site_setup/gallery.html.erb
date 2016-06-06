@@ -28,21 +28,21 @@
 		      <div class="col-md-12">
 	          <div class="row">
               <h2 class="gd-title page-header">Gallary</h2>
-            <%= form_for(@gallary, {url: wizard_path, :method => :put}) do |form| %>
-            <!-- Gallary Image Association Fields -->           
-              <div class="form-group">
-                <div class="row image-box">
-                  <%= form.fields_for :pictures do |image| %>
-                    <%= render 'gallary_picture_fields', :f => image %>
-                  <% end %>
-                  <div class="link">
-                    <%= link_to_add_association '<div class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add Image</div>'.html_safe, form, :pictures, :class => 'btn add-btn', partial: 'gallary_picture_fields', 'data-association-insertion-method' => 'before' %>
-                  </div>                   
-                </div>                
-              </div>	             
-              <!-- End Gallary Image Association Fields -->
-              <%= form.submit %>
-            <% end %>
+              <%= form_for(@gallary, {url: wizard_path, :method => :put}) do |form| %>
+              <!-- Gallary Image Association Fields -->           
+                <div class="form-group">
+                  <div class="row image-box">
+                    <%= form.fields_for :pictures do |image| %>
+                      <%= render 'gallary_picture_fields', :f => image %>
+                    <% end %>
+                    <div class="link">
+                      <%= link_to_add_association '<div class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add Image</div>'.html_safe, form, :pictures, :class => 'btn add-btn', partial: 'gallary_picture_fields', 'data-association-insertion-method' => 'before' %>
+                    </div>                   
+                  </div>                
+                </div>	             
+                <!-- End Gallary Image Association Fields -->
+                <%= form.submit %>
+              <% end %>
             
 	          </div>
 		      </div>
