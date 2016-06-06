@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602190344) do
+ActiveRecord::Schema.define(version: 20160606105504) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(version: 20160602190344) do
     t.string   "color",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "url",        limit: 255
   end
 
   create_table "types", force: :cascade do |t|
