@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606105504) do
+ActiveRecord::Schema.define(version: 20160606173455) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20160606105504) do
     t.integer "listing_id",  limit: 4, null: false
     t.integer "category_id", limit: 4, null: false
   end
+
+  create_table "colors", force: :cascade do |t|
+    t.string  "name",        limit: 255
+    t.string  "code",        limit: 255
+    t.integer "template_id", limit: 4
+  end
+
+  add_index "colors", ["template_id"], name: "index_colors_on_template_id", using: :btree
 
   create_table "faqs", force: :cascade do |t|
     t.string   "key",        limit: 255
@@ -238,11 +246,11 @@ ActiveRecord::Schema.define(version: 20160606105504) do
   add_index "sliders", ["site_id"], name: "index_sliders_on_site_id", using: :btree
 
   create_table "templates", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "color",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "url",        limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "url",          limit: 255
+    t.string   "demo_website", limit: 255
+    t.string   "display_name", limit: 255
   end
 
   create_table "types", force: :cascade do |t|
@@ -304,6 +312,7 @@ ActiveRecord::Schema.define(version: 20160606105504) do
     t.string  "description", limit: 255
   end
 
+  add_foreign_key "colors", "templates"
   add_foreign_key "gallaries", "sites"
   add_foreign_key "listing_images", "listings", column: "Listing_id"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"

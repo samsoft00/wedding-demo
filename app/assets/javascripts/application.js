@@ -39,6 +39,7 @@
 //= require jquery.minicolors
 //= require bootstrap-filestyle
 //= require ImageSelect.jquery
+//= require start
 
 $(function() {
   // limits the number of categories

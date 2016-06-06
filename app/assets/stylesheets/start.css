@@ -1,3 +1,129 @@
-.template-box .thumb {
-	height: 235px
+
+
+.template-preview-open{
+  overflow: hidden;
+}
+
+.template-preview-close{
+  display: none;
+}
+
+#template-preview{
+  /*display: none;*/
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 111111111;
+}
+
+#template-preview #site-wrapper {
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  position: relative;
+  background-color: #FFFFFF;
+}
+#template-preview #site-wrapper #device-bg {
+  position: absolute;
+  left: 0;
+  margin-top: 30px;
+  width: 100%;
+  height: 100%;
+} 
+
+#template-preview #iframe-preview {
+    position: relative;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+}
+
+.center-content {
+  min-height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+#template-preview iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+} 
+
+#template-preview #toggle-navbar {
+  position: absolute;
+  right: 40px;
+  top: 66px;
+  padding: 0px 3px;
+  z-index: 111111112;
+  background: rgba(0,0,0,0.5);
+  border-radius: 3px;
+} 
+
+.thumbnail-template {
+  display: block;
+  position: relative;
+  margin: 15px 0;
+  height: 257px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 2px 1px #dedede;
+  box-shadow: 0 0 2px 1px #dedede;
+}
+
+.thumbnail-template .browser-bar {
+  position: absolute;
+  width: 100%;
+  height: 11px;
+  font-size: 1px;
+  line-height: 11px;
+  background-color: #e0e0e0;
+}
+
+.thumbnail-template .overlay {
+  z-index: 20;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  background: rgba(0,0,0,0.5);
+  -webkit-transition: opacity 0.25s;
+  -o-transition: opacity 0.25s;
+  transition: opacity 0.25s;
+}
+
+.thumbnail-template .overlay, .thumbnail-template img {
+    position: absolute;
+    top: 11px;
+}
+
+.thumbnail-template .btn {
+    font-size: 13px;
+    background: white;
+    color: #111111;
+}
+
+.thumbnail-template .overlay, .thumbnail-template img {
+    position: absolute;
+    top: 11px;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+img {
+    vertical-align: middle;
+    border: 0;
 }
