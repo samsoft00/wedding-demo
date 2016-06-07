@@ -47,9 +47,7 @@ gem 'refile', '~> 0.6.2', github: 'refile/refile', require: "refile/rails"
 gem "refile-mini_magick"
 # gem "refile-s3"
 gem 'high_voltage', '~> 3.0'
-# gem "refile", require: ["refile/rails", "refile/image_processing"]
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'will_paginate-bootstrap'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -54,23 +54,18 @@
 								</div>
 							<% end %>
 
-							<div class="col-md-12">
-								<hr/>
-								<div class="form-group">
-									<%= f.submit "Continue", class: "btn btn-success" %>
-								</div>
-							</div>
+							<hr/>
 
             <% end %>              
 
         </div>        
       </div>
 
-			<%= will_paginate @templates %>
-
-<!-- 	    <div class="row">
+	    <div class="row">
 	      <div class="col-md-12 tp-pagination">
 	        <ul class="pagination">
+	        	<%= will_paginate @templates, renderer: BootstrapPagination::Rails %>
+	        <!--
 	          <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">Previous</span> </a> </li>
 	          <li class="active"><a href="#">1</a></li>
 	          <li><a href="#">2</a></li>
@@ -78,9 +73,10 @@
 	          <li><a href="#">4</a></li>
 	          <li><a href="#">5</a></li>
 	          <li> <a href="#" aria-label="Next"> <span aria-hidden="true">NEXT</span> </a> </li>
+	          -->
 	        </ul>
 	      </div>
-	    </div>   -->    
+	    </div>      
 
     </div>
 
@@ -98,7 +94,7 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="#">Start with this design</a>
+	      <%= link_to "Start with this design", {}, class:"navbar-brand" %>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->

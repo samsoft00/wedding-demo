@@ -10,7 +10,7 @@ class Start::WeddingPlanController < ApplicationController
 	def show
 		case step
 		when :'select-template'
-			@templates = Template.all()
+			@templates = Template.paginate(:page => params[:page], :per_page => 6)
 			@layout = SiteLayout.new
 			
 		when :'choose-plan'
