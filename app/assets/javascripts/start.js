@@ -15,7 +15,10 @@ $(function(){
 		var iframe = divIframe.find('iframe');
 
 		var templateFrame = $('#template-preview');
+		var tempSelector = $('#template_selector');
+
 		iframe.attr('src', template.demo_website);
+		tempSelector.attr('href', 'http://go_to_next_url.com');
 		templateFrame.css("display", "block");
 		$('body').addClass('template-preview-open');
 		
