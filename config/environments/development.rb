@@ -10,6 +10,7 @@ Rails.application.configure do
   config.eager_load = false
 
   config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { host: 'lvh.me', port: 3000 }
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -23,7 +24,6 @@ Rails.application.configure do
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
-  config.action_mailer.default_url_options = { host: 'lvh.me', port: 3000 }
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.

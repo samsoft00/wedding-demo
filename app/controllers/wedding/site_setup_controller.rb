@@ -91,7 +91,7 @@ class Wedding::SiteSetupController < ApplicationController
 	private
 
 		def lists_template
-			@templates = Template.all()
+			@templates = Template.paginate(:page => params[:page])
 		end
 
 		def set_site
