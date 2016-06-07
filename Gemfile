@@ -47,7 +47,6 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 gem 'icheck-rails'
 gem 'refile', '~> 0.6.2', github: 'refile/refile', require: "refile/rails"
 gem "refile-mini_magick"
-# gem "refile-s3"
 gem 'high_voltage', '~> 3.0'
 gem "refile-s3"
 # Use Unicorn as the app server
@@ -58,7 +57,7 @@ gem "refile-s3"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  # gem 'byebug'
 	# Use mysql as the database for Active Record
 	gem 'mysql2', '>= 0.3.13', '< 0.5'   
 end
