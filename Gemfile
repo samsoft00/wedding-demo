@@ -36,6 +36,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
+
 gem 'summernote-rails'
 gem 'themes_on_rails', '~> 0.4.0'
 gem 'wicked', '~> 1.3'
@@ -47,8 +49,7 @@ gem 'refile', '~> 0.6.2', github: 'refile/refile', require: "refile/rails"
 gem "refile-mini_magick"
 # gem "refile-s3"
 gem 'high_voltage', '~> 3.0'
-gem 'will_paginate-bootstrap'
-
+gem "refile-s3"
 # Use Unicorn as the app server
 # gem 'unicorn'
 
