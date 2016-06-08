@@ -735,7 +735,7 @@ p.wp-caption-text { margin-bottom: 0; color: #353535; font-size: 11px;}
 	14. - Most Used / Repeatable Page CSS  
 ------------------------------------------*/
 /*------ Page Header ------------*/
-.tp-page-head{ background:url( <%= asset_path 'page-header-img.jpg' %>);background-position: center; -webkit-background-size: cover; -moz-background-size: cover; background-size: cover; -o-background-size: cover;}
+.tp-page-head{ background:url(page-header-img.jpg);background-position: center; -webkit-background-size: cover; -moz-background-size: cover; background-size: cover; -o-background-size: cover;}
 .tp-page-head .page-header{ border: none; padding: 40px 0px;}
 .tp-page-head .page-header h1{color: #fff;}
 /*----- Breadcrumb --------*/
