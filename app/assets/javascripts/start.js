@@ -17,8 +17,8 @@ $(function(){
 		var templateFrame = $('#template-preview');
 		var tempSelector = $('#template_selector');
 
-		iframe.attr('src', template.demo_website);
-		tempSelector.attr('href', 'http://go_to_next_url.com?template_id='+template.id);
+		iframe.attr('src', 'http:'+template.demo_website);
+		tempSelector.attr('href', '/start/choose-plan?template_id='+template.id+'&color=');
 		templateFrame.css("display", "block");
 		$('body').addClass('template-preview-open');
 		
