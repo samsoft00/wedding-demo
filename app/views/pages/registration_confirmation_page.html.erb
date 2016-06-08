@@ -1,1 +1,55 @@
-Successful registration here now
+<style type="text/css">
+	
+   /* ==========================================================================
+    Published Page
+   ========================================================================== */
+
+  #main.published-page {
+    padding: 54px 0 69px;
+  }
+
+  .congratulations {
+    background-color: #fff;
+    padding:60px;
+    padding-bottom:65px;
+    border-radius: 4px;
+  }
+
+  .congratulations i {
+    font-size: 72px;
+    color: #00a651;
+    margin-bottom: 18px;
+  }
+
+  .congratulations h1 {
+    font-weight: 700;
+    color: #00a651;
+    margin: 0 0 4px;
+  }
+
+  .congratulations h4 {
+    color: #b0b0b0;
+    font-size: 19px;
+    line-height: 22px;
+    margin: 10px 0;
+    padding: 0;
+  }	
+  .congratulations i{}
+
+</style>
+
+
+<section id="main" class="clearfix published-page">
+	<div class="container">
+		<div class="row text-center">				
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="congratulations">
+					<i class="fa fa-check-square-o"></i>
+					<h1>Congratulations!</h1>
+					<h4>A mail with confirmation link has been sent to you email address, kindly check your email and click the confirmation link to activate your account.</h4>
+					<p><%= link_to "Go Home", root_path, class: "btn btn-sm btn-success" %></p>
+				</div>
+			</div>
+		</div><!-- row -->	
+	</div><!-- container -->
+</section>

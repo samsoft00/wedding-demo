@@ -1,5 +1,5 @@
 class Template < ActiveRecord::Base
-	has_one :site
+	belongs_to :site
 	has_many :colors
 
 end

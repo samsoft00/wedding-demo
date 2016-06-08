@@ -1,7 +1,8 @@
 class Site < ActiveRecord::Base
   belongs_to :user
-  belongs_to :template
 
+  has_one :template
+  has_one :wedding_package
   has_one :our_story, dependent: :destroy
   has_one :site_layout, dependent: :destroy
   has_one :slider, dependent: :destroy
@@ -24,7 +25,7 @@ class Site < ActiveRecord::Base
   validates :groom_name, :bride_name, :wedding_date, :about_groom, :about_bride, :photographer, :event_planner, presence: true, :if => lambda { |o| o.form_step == "all" }
 
   with_options :if => lambda { |o| o.form_step == "register" } do |step|
-    step.validates :username, :email, :wedding_date, :bride_name, :groom_name, presence: true
+    step.validates :username, :email, :wedding_date, :bride_name, :groom_name, :template_id, :wedding_package_id, presence: true
 
     step.validates_associated :user, if: -> { c_user.nil? }
     step.before_validation :create_user_and_validate, if: -> { c_user.nil? }

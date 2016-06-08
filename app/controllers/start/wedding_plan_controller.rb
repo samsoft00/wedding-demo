@@ -10,15 +10,18 @@ class Start::WeddingPlanController < ApplicationController
 	def show
 		case step
 		when :'select-template'
+			session[:layout] = session[:package] = nil
 			@templates = Template.paginate(:page => params[:page], :per_page => 6)
 			@layout = SiteLayout.new
 			
 		when :'choose-plan'
 			@packages = WeddingPackage.all()
 			@weddingpackage = WeddingPackage.new
+			session[:template] = params[:template_id] if params[:template_id].present?
+			session[:package] = params[:package] if params[:package].present?
 
 		when :register
-			@template = Template.find(session[:layout])
+			@template = Template.find(params[:template_id])
 			@site = Site.new
 		end
 
@@ -43,7 +46,7 @@ class Start::WeddingPlanController < ApplicationController
 			redirect_to next_wizard_path(template: session[:layout], package: session[:package]) and return
 
 		when :register
-			@template = Template.find(session[:layout])
+			@template = Template.find(session[:template])
 			@site = Site.new(site_params.merge({form_step: step.to_s, c_user: current_user}))
 			session[:layout] = session[:package] = nil if @site.valid?
 			
@@ -70,7 +73,7 @@ class Start::WeddingPlanController < ApplicationController
 		end
 
 		def site_params
-			params.require(:site).permit(:bride_name, :groom_name, :wedding_date, :username, :email)
+			params.require(:site).permit(:bride_name, :groom_name, :wedding_date, :username, :email, :template_id, :wedding_package_id)
 		end			
 
 	  def check_errors(obj)

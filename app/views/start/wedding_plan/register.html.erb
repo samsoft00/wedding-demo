@@ -1,27 +1,4 @@
-<div class="tp-page-head"><!-- page header -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="page-header">
-          <h1>Create Account</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /.page header -->
-<div class="tp-breadcrumb">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <ol class="breadcrumb">
-          <li><a href="#">Home</a></li>
-          <li class="active">Create Account</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</div>
+
 <div class="main-container">
   <div class="container">
   	
@@ -32,6 +9,8 @@
   			</div>
 
 		  	<%= form_for @site, url: wizard_path, method: :put do |f| %>
+	        <%= f.hidden_field(:wedding_package_id, :value => params[:package].present? ? params[:package] : session[:package]) %>
+	        <%= f.hidden_field(:template_id, :value => params[:template_id].present? ? params[:template_id] : session[:template_id]) %>
 	  			
 	  			<div class="row">
 	  				<div class="col-md-12"><%= render 'shared/form_error_message', f: f %></div>
@@ -42,7 +21,7 @@
 			  		<div class="col-md-6">
 
 							  <div class="form-group">
-							    <%= f.text_field :username, autofocus: true, class:"form-control", placeholder: "Username" %>
+							    <%= f.text_field :username, autofocus: true, class:"form-control", placeholder: "Enter Subdomain" %>
 							  </div>
 							  <div class="form-group">
 							    <%= f.text_field :email, class:"form-control", placeholder: "Email Address" %>
@@ -64,30 +43,21 @@
 
 							  </div>
 							  <div class="form-group">
-								  <%= f.submit "Create Account" %>
-								  <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+								  <%= f.submit "Create Account", class: "btn tp-btn-primary tp-btn-lg" %>
+								  <%= link_to "Restart", start_wedding_plan_index_path, class: "btn tp-btn-default tp-btn-lg" %>
 							  </div> 			
 
 			  		</div>
 
 						<div class="col-md-6 text-center template-box">
-							<div class="panel panel-default">
-							  <div class="panel-body">
-									<div class="thumb">
-										<!-- <a href="http://codelayers.net/templates/hasta/corporate/fullwidth/index.html" target="_blank"> -->
-											<div class="overley"></div>
-										</a>
-										<%= image_tag "http://codelayers.net/templates/hasta/demo/images/thumb1.jpg", alt:"", class:"img-responsive" %>
-									</div>
-							  </div>
-							  <div class="panel-footer">
-									<div class="but">
-										<label><%= @template.name.upcase %></label>
-									</div>	
-									
-							  </div>
-							</div>							
-						</div>
+							<a class="thumbnail-template reverse" data-template="<%= @template.to_json(include:[:colors]) %>" href="#" style="height:300px; margin:0">
+
+								<div class="overlay center-content">
+									<label class="btn btn-link btn-primary-hover"><%= "View #{@template.display_name}" %></label>
+								</div>
+								<%= image_tag "https://s3.amazonaws.com/wedding-ng/template/#{@template.url}.png", alt:"", class:"img-responsive", width:"100%" %>
+							</a>							
+						</div>			  		
 
 	  			</div>
 		  	<% end %>

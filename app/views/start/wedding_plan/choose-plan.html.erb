@@ -43,9 +43,9 @@
               <%= f.hidden_field(:amount, :value => package.amount) %> 
               <%= f.hidden_field(:id, :value => package.id) %>
               <%= f.hidden_field(:package, :value => package.package) %>
-              <%= f.hidden_field(:template, :value => params[:template]) %>
+              <%= f.hidden_field(:template, :value => params[:template_id]) %>
               
-              <%= f.submit "Select Plan" %>
+              <%= link_to "Select Plan", start_wedding_plan_path(id: "register",:template_id => params[:template_id], :package => package.id), class: "btn tp-btn-default tp-btn-lg" %>
             </div>
             <ul class="check-circle list-group">
               <% package.wedding_features.each do | feature | %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606173455) do
+ActiveRecord::Schema.define(version: 20160608181648) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -219,22 +219,26 @@ ActiveRecord::Schema.define(version: 20160606173455) do
   add_index "site_layouts", ["site_id"], name: "index_site_layouts_on_site_id", using: :btree
 
   create_table "sites", force: :cascade do |t|
-    t.string   "groom_name",     limit: 255
-    t.string   "bride_name",     limit: 255
-    t.text     "about_groom",    limit: 65535
-    t.text     "about_bride",    limit: 65535
+    t.string   "groom_name",         limit: 255
+    t.string   "bride_name",         limit: 255
+    t.text     "about_groom",        limit: 65535
+    t.text     "about_bride",        limit: 65535
     t.date     "wedding_date"
-    t.string   "photographer",   limit: 255
-    t.string   "event_planner",  limit: 255
-    t.integer  "user_id",        limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.string   "groom_image_id", limit: 255
-    t.string   "bride_image_id", limit: 255
-    t.string   "status",         limit: 255
+    t.string   "photographer",       limit: 255
+    t.string   "event_planner",      limit: 255
+    t.integer  "user_id",            limit: 4
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "groom_image_id",     limit: 255
+    t.string   "bride_image_id",     limit: 255
+    t.string   "status",             limit: 255
+    t.integer  "template_id",        limit: 4
+    t.integer  "wedding_package_id", limit: 4
   end
 
+  add_index "sites", ["template_id"], name: "index_sites_on_template_id", using: :btree
   add_index "sites", ["user_id"], name: "index_sites_on_user_id", using: :btree
+  add_index "sites", ["wedding_package_id"], name: "index_sites_on_wedding_package_id", using: :btree
 
   create_table "sliders", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -307,10 +311,13 @@ ActiveRecord::Schema.define(version: 20160606173455) do
   add_index "wedding_locations", ["site_id"], name: "index_wedding_locations_on_site_id", using: :btree
 
   create_table "wedding_packages", force: :cascade do |t|
-    t.string  "package",     limit: 255
-    t.decimal "amount",                  precision: 10
-    t.string  "description", limit: 255
+    t.string  "package",            limit: 255
+    t.decimal "amount",                         precision: 10
+    t.string  "description",        limit: 255
+    t.integer "wedding_package_id", limit: 4
   end
+
+  add_index "wedding_packages", ["wedding_package_id"], name: "index_wedding_packages_on_wedding_package_id", using: :btree
 
   add_foreign_key "colors", "templates"
   add_foreign_key "gallaries", "sites"
@@ -321,8 +328,11 @@ ActiveRecord::Schema.define(version: 20160606173455) do
   add_foreign_key "our_stories", "sites"
   add_foreign_key "rsvps", "sites"
   add_foreign_key "site_layouts", "sites"
+  add_foreign_key "sites", "templates"
   add_foreign_key "sites", "users"
+  add_foreign_key "sites", "wedding_packages"
   add_foreign_key "sliders", "sites"
   add_foreign_key "wedding_features", "wedding_packages"
   add_foreign_key "wedding_locations", "sites"
+  add_foreign_key "wedding_packages", "wedding_packages"
 end
